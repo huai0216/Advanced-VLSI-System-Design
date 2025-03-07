@@ -1,0 +1,31 @@
+set company "CIC"
+set designer "Student"
+
+set CoreSearchPath /usr/cad/CBDK/Executable_Package/Collaterals/IP/stdcell/N16ADFP_StdCell/NLDM/
+set IOSearchPath /usr/cad/CBDK/Executable_Package/Collaterals/IP/stdio/N16ADFP_StdIO/NLDM/
+set MemoryPath ../sim/SRAM\ ../sim/data_array\ ../sim/tag_array
+set DefintionPath ../include
+
+set search_path    "$CoreSearchPath $IOSearchPath $MemoryPath $DefintionPath $search_path"
+set target_library " N16ADFP_StdCellss0p72vm40c.db N16ADFP_StdCellff0p88v125c.db N16ADFP_StdIOss0p72v1p62v125c.db N16ADFP_StdIOff0p88v1p98vm40c.db SRAM_ss0p72v0p72vm40c_100a.db SRAM_ff0p88v0p88v125c_100a.db \
+                     data_array_ff0p88v0p88v125c_100a.db data_array_ss0p72v0p72vm40c_100a.db tag_array_ff0p88v0p88v125c_100a.db tag_array_ss0p72v0p72vm40c_100a.db"
+set synthetic_library "dw_foundation.sldb"
+set link_library   "* $target_library $synthetic_library"
+set symbol_library    "generic_sdb"
+
+#set_min_lib "fsa0m_a_generic_core_ss1p62v125c.db" \
+       -min "fsa0m_a_generic_core_ff1p98vm40c.db"     ; # for core lib
+set_min_lib "N16ADFP_StdIOss0p72v1p62v125c.db" \
+       -min "N16ADFP_StdIOff0p88v1p98vm40c.db"   ; # for IO lib
+set_min_lib "SRAM_ss0p72v0p72vm40c_100a.db" \
+       -min "SRAM_ff0p88v0p88v125c_100a.db"           ; # for Memory
+set_min_lib "data_array_ss0p72v0p72vm40c_100a.db" \
+       -min "data_array_ff0p88v0p88v125c_100a.db"                        ; # for Memory
+set_min_lib "tag_array_ss0p72v0p72vm40c_100a.db" \
+       -min "tag_array_ff0p88v0p88v125c_100a.db"                         ; # for Memory
+
+set verilogout_no_tri true
+set hdlin_enable_presto_for_vhdl "TRUE"
+set sh_enable_line_editing true
+history keep 100
+alias h history

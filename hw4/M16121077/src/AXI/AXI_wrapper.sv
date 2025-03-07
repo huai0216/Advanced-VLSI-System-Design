@@ -1,0 +1,1395 @@
+module AXI_wrapper(
+
+	input axi_clk,
+	input axi_rstn,
+
+	input rom_clk,
+	input rom_rstn,
+
+	input dram_clk,
+	input dram_rstn,
+	input cpu_clk,
+	input cpu_rstn,
+
+	//SLAVE INTERFACE FOR MASTERS
+	
+	output logic WTO,
+
+	//WRITE ADDRESS dma
+	input [`AXI_ID_BITS-1:0] AWID_dma,
+	input [`AXI_ADDR_BITS-1:0] AWADDR_dma,
+	input [`AXI_LEN_BITS-1:0] AWLEN_dma,
+	input [`AXI_SIZE_BITS-1:0] AWSIZE_dma,
+	input [1:0] AWBURST_dma,
+	input AWVALID_dma,
+	output logic AWREADY_dma,
+	
+	//WRITE DATA dma
+	input [`AXI_DATA_BITS-1:0] WDATA_dma,
+	input [`AXI_STRB_BITS-1:0] WSTRB_dma,
+	input WLAST_dma,
+	input WVALID_dma,
+	output logic WREADY_dma,
+	
+	//WRITE RESPONSE dma
+	output logic [`AXI_ID_BITS-1:0] BID_dma,
+	output logic [1:0] BRESP_dma,
+	output logic BVALID_dma,
+	input BREADY_dma,
+
+	//WRITE ADDRESS
+	input [`AXI_ID_BITS-1:0] AWID_M1,
+	input [`AXI_ADDR_BITS-1:0] AWADDR_M1,
+	input [`AXI_LEN_BITS-1:0] AWLEN_M1,
+	input [`AXI_SIZE_BITS-1:0] AWSIZE_M1,
+	input [1:0] AWBURST_M1,
+	input AWVALID_M1,
+	output logic AWREADY_M1,
+	
+	//WRITE DATA
+	input [`AXI_DATA_BITS-1:0] WDATA_M1,
+	input [`AXI_STRB_BITS-1:0] WSTRB_M1,
+	input WLAST_M1,
+	input WVALID_M1,
+	output logic WREADY_M1,
+	
+	//WRITE RESPONSE
+	output logic [`AXI_ID_BITS-1:0] BID_M1,
+	output logic [1:0] BRESP_M1,
+	output logic BVALID_M1,
+	input BREADY_M1,
+
+	//READ ADDRESS dma
+	input [`AXI_ID_BITS-1:0] ARID_dma,
+	input [`AXI_ADDR_BITS-1:0] ARADDR_dma,
+	input [`AXI_LEN_BITS-1:0] ARLEN_dma,
+	input [`AXI_SIZE_BITS-1:0] ARSIZE_dma,
+	input [1:0] ARBURST_dma,
+	input ARVALID_dma,
+	output logic ARREADY_dma,
+	
+	//READ DATA dma
+	output logic [`AXI_ID_BITS-1:0] RID_dma,
+	output logic [`AXI_DATA_BITS-1:0] RDATA_dma,
+	output logic [1:0] RRESP_dma,
+	output logic RLAST_dma,
+	output logic RVALID_dma,
+	input RREADY_dma,
+
+	//READ ADDRESS0
+	input [`AXI_ID_BITS-1:0] ARID_M0,
+	input [`AXI_ADDR_BITS-1:0] ARADDR_M0,
+	input [`AXI_LEN_BITS-1:0] ARLEN_M0,
+	input [`AXI_SIZE_BITS-1:0] ARSIZE_M0,
+	input [1:0] ARBURST_M0,
+	input ARVALID_M0,
+	output logic ARREADY_M0,
+	
+	//READ DATA0
+	output logic [`AXI_ID_BITS-1:0] RID_M0,
+	output logic [`AXI_DATA_BITS-1:0] RDATA_M0,
+	output logic [1:0] RRESP_M0,
+	output logic RLAST_M0,
+	output logic RVALID_M0,
+	input RREADY_M0,
+	
+	//READ ADDRESS1
+	input [`AXI_ID_BITS-1:0] ARID_M1,
+	input [`AXI_ADDR_BITS-1:0] ARADDR_M1,
+	input [`AXI_LEN_BITS-1:0] ARLEN_M1,
+	input [`AXI_SIZE_BITS-1:0] ARSIZE_M1,
+	input [1:0] ARBURST_M1,
+	input ARVALID_M1,
+	output logic ARREADY_M1,
+	
+	//READ DATA1
+	output logic [`AXI_ID_BITS-1:0] RID_M1,
+	output logic [`AXI_DATA_BITS-1:0] RDATA_M1,
+	output logic [1:0] RRESP_M1,
+	output logic RLAST_M1,
+	output logic RVALID_M1,
+	input RREADY_M1,
+
+	//MASTER INTERFACE FOR SLAVES
+	
+	//WRITE ADDRESS  IM
+	output logic [`AXI_IDS_BITS-1:0] AWID_S1,
+	output logic [`AXI_ADDR_BITS-1:0] AWADDR_S1,
+	output logic [`AXI_LEN_BITS-1:0] AWLEN_S1,
+	output logic [`AXI_SIZE_BITS-1:0] AWSIZE_S1,
+	output logic [1:0] AWBURST_S1,
+	output logic AWVALID_S1,
+	input AWREADY_S1,
+	
+	//WRITE DATA IM
+	output logic [`AXI_DATA_BITS-1:0] WDATA_S1,
+	output logic [`AXI_STRB_BITS-1:0] WSTRB_S1,
+	output logic WLAST_S1,
+	output logic WVALID_S1,
+	input WREADY_S1,
+	
+	//WRITE RESPONSE IM
+	input [`AXI_IDS_BITS-1:0] BID_S1,
+	input [1:0] BRESP_S1,
+	input BVALID_S1,
+	output logic BREADY_S1,
+
+	//WRITE ADDRESS  DM
+	output logic [`AXI_IDS_BITS-1:0] AWID_S2,
+	output logic [`AXI_ADDR_BITS-1:0] AWADDR_S2,
+	output logic [`AXI_LEN_BITS-1:0] AWLEN_S2,
+	output logic [`AXI_SIZE_BITS-1:0] AWSIZE_S2,
+	output logic [1:0] AWBURST_S2,
+	output logic AWVALID_S2,
+	input AWREADY_S2,
+	
+	//WRITE DATA DM
+	output logic [`AXI_DATA_BITS-1:0] WDATA_S2,
+	output logic [`AXI_STRB_BITS-1:0] WSTRB_S2,
+	output logic WLAST_S2,
+	output logic WVALID_S2,
+	input WREADY_S2,
+	
+	//WRITE RESPONSE DM
+	input [`AXI_IDS_BITS-1:0] BID_S2,
+	input [1:0] BRESP_S2,
+	input BVALID_S2,
+	output logic BREADY_S2,
+
+	//WRITE ADDRESS  DMA
+	output logic [`AXI_IDS_BITS-1:0] AWID_S3,
+	output logic [`AXI_ADDR_BITS-1:0] AWADDR_S3,
+	output logic [`AXI_LEN_BITS-1:0] AWLEN_S3,
+	output logic [`AXI_SIZE_BITS-1:0] AWSIZE_S3,
+	output logic [1:0] AWBURST_S3,
+	output logic AWVALID_S3,
+	input AWREADY_S3,
+	
+	//WRITE DATA DMA
+	output logic [`AXI_DATA_BITS-1:0] WDATA_S3,
+	output logic [`AXI_STRB_BITS-1:0] WSTRB_S3,
+	output logic WLAST_S3,
+	output logic WVALID_S3,
+	input WREADY_S3,
+	
+	//WRITE RESPONSE DMA
+	input [`AXI_IDS_BITS-1:0] BID_S3,
+	input [1:0] BRESP_S3,
+	input BVALID_S3,
+	output logic BREADY_S3,
+
+	//WRITE ADDRESS  WDT
+	output logic [`AXI_IDS_BITS-1:0] AWID_S4,
+	output logic [`AXI_ADDR_BITS-1:0] AWADDR_S4,
+	output logic [`AXI_LEN_BITS-1:0] AWLEN_S4,
+	output logic [`AXI_SIZE_BITS-1:0] AWSIZE_S4,
+	output logic [1:0] AWBURST_S4,
+	output logic AWVALID_S4,
+	input AWREADY_S4,
+	
+	//WRITE DATA WDT
+	output logic [`AXI_DATA_BITS-1:0] WDATA_S4,
+	output logic [`AXI_STRB_BITS-1:0] WSTRB_S4,
+	output logic WLAST_S4,
+	output logic WVALID_S4,
+	input WREADY_S4,
+	
+	//WRITE RESPONSE WDT
+	input [`AXI_IDS_BITS-1:0] BID_S4,
+	input [1:0] BRESP_S4,
+	input BVALID_S4,
+	output logic BREADY_S4,
+	input WTO_WDT,
+
+	//WRITE ADDRESS  DRAM
+	output logic [`AXI_IDS_BITS-1:0] AWID_S5,
+	output logic [`AXI_ADDR_BITS-1:0] AWADDR_S5,
+	output logic [`AXI_LEN_BITS-1:0] AWLEN_S5,
+	output logic [`AXI_SIZE_BITS-1:0] AWSIZE_S5,
+	output logic [1:0] AWBURST_S5,
+	output logic AWVALID_S5,
+	input AWREADY_S5,
+	
+	//WRITE DATA DRAM
+	output logic [`AXI_DATA_BITS-1:0] WDATA_S5,
+	output logic [`AXI_STRB_BITS-1:0] WSTRB_S5,
+	output logic WLAST_S5,
+	output logic WVALID_S5,
+	input WREADY_S5,
+	
+	//WRITE RESPONSE DRAM
+	input [`AXI_IDS_BITS-1:0] BID_S5,
+	input [1:0] BRESP_S5,
+	input BVALID_S5,
+	output logic BREADY_S5,
+
+	
+	//READ ADDRESS0 ROM
+	output logic [`AXI_IDS_BITS-1:0] ARID_S0,
+	output logic [`AXI_ADDR_BITS-1:0] ARADDR_S0,
+	output logic [`AXI_LEN_BITS-1:0] ARLEN_S0,
+	output logic [`AXI_SIZE_BITS-1:0] ARSIZE_S0,
+	output logic [1:0] ARBURST_S0,
+	output logic ARVALID_S0,
+	input ARREADY_S0,
+	
+	//READ DATA0 ROM
+	input [`AXI_IDS_BITS-1:0] RID_S0,
+	input [`AXI_DATA_BITS-1:0] RDATA_S0,
+	input [1:0] RRESP_S0,
+	input RLAST_S0,
+	input RVALID_S0,
+	output logic RREADY_S0,
+	
+	//READ ADDRESS IM
+	output logic [`AXI_IDS_BITS-1:0] ARID_S1,
+	output logic [`AXI_ADDR_BITS-1:0] ARADDR_S1,
+	output logic [`AXI_LEN_BITS-1:0] ARLEN_S1,
+	output logic [`AXI_SIZE_BITS-1:0] ARSIZE_S1,
+	output logic [1:0] ARBURST_S1,
+	output logic ARVALID_S1,
+	input ARREADY_S1,
+	
+	//READ DATA IM
+	input [`AXI_IDS_BITS-1:0] RID_S1,
+	input [`AXI_DATA_BITS-1:0] RDATA_S1,
+	input [1:0] RRESP_S1,
+	input RLAST_S1,
+	input RVALID_S1,
+	output logic RREADY_S1,
+
+	//READ ADDRESS DM
+	output logic [`AXI_IDS_BITS-1:0] ARID_S2,
+	output logic [`AXI_ADDR_BITS-1:0] ARADDR_S2,
+	output logic [`AXI_LEN_BITS-1:0] ARLEN_S2,
+	output logic [`AXI_SIZE_BITS-1:0] ARSIZE_S2,
+	output logic [1:0] ARBURST_S2,
+	output logic ARVALID_S2,
+	input ARREADY_S2,
+	
+	//READ DATA DM
+	input [`AXI_IDS_BITS-1:0] RID_S2,
+	input [`AXI_DATA_BITS-1:0] RDATA_S2,
+	input [1:0] RRESP_S2,
+	input RLAST_S2,
+	input RVALID_S2,
+	output logic RREADY_S2,
+
+	//READ ADDRESS DMA
+	output logic [`AXI_IDS_BITS-1:0] ARID_S3,
+	output logic [`AXI_ADDR_BITS-1:0] ARADDR_S3,
+	output logic [`AXI_LEN_BITS-1:0] ARLEN_S3,
+	output logic [`AXI_SIZE_BITS-1:0] ARSIZE_S3,
+	output logic [1:0] ARBURST_S3,
+	output logic ARVALID_S3,
+	input ARREADY_S3,
+	
+	//READ DATA DMA
+	input [`AXI_IDS_BITS-1:0] RID_S3,
+	input [`AXI_DATA_BITS-1:0] RDATA_S3,
+	input [1:0] RRESP_S3,
+	input RLAST_S3,
+	input RVALID_S3,
+	output logic RREADY_S3,
+
+	//READ ADDRESS DRAM
+	output logic [`AXI_IDS_BITS-1:0] ARID_S5,
+	output logic [`AXI_ADDR_BITS-1:0] ARADDR_S5,
+	output logic [`AXI_LEN_BITS-1:0] ARLEN_S5,
+	output logic [`AXI_SIZE_BITS-1:0] ARSIZE_S5,
+	output logic [1:0] ARBURST_S5,
+	output logic ARVALID_S5,
+	input ARREADY_S5,
+	
+	//READ DATA DRAM
+	input [`AXI_IDS_BITS-1:0] RID_S5,
+	input [`AXI_DATA_BITS-1:0] RDATA_S5,
+	input [1:0] RRESP_S5,
+	input RLAST_S5,
+	input RVALID_S5,
+	output logic RREADY_S5
+
+);
+
+//READ ADDRESS0 ROM
+//logic [`AXI_ID_BITS-1:0] ARID_IF, ARID_MEM, ARID_dma_axi;
+logic [`AXI_IDS_BITS-1:0] ARID_IF, ARID_MEM, ARID_dma_axi, ARID_ROM, ARID_IM, ARID_DM, ARID_SDMA, ARID_DRAM;
+logic [`AXI_ADDR_BITS-1:0] ARADDR_ROM, ARADDR_IF, ARADDR_MEM, ARADDR_dma_axi, ARADDR_IM, ARADDR_DM, ARADDR_SDMA, ARADDR_DRAM;
+logic [`AXI_LEN_BITS-1:0] ARLEN_ROM, ARLEN_IF, ARLEN_MEM, ARLEN_dma_axi, ARLEN_IM, ARLEN_DM, ARLEN_SDMA, ARLEN_DRAM;
+logic [`AXI_SIZE_BITS-1:0] ARSIZE_ROM, ARSIZE_IF, ARSIZE_MEM, ARSIZE_dma_axi, ARSIZE_IM, ARSIZE_DM, ARSIZE_SDMA, ARSIZE_DRAM;
+logic [1:0] ARBURST_ROM, ARBURST_IF, ARBURST_MEM, ARBURST_dma_axi, ARBURST_IM, ARBURST_DM, ARBURST_SDMA, ARBURST_DRAM;
+logic ARVALID_ROM, ARVALID_IF, ARVALID_MEM, ARVALID_dma_axi, ARVALID_IM, ARVALID_DM, ARVALID_SDMA, ARVALID_DRAM;
+logic ARREADY_ROM, ARREADY_IF, ARREADY_MEM, ARREADY_dma_axi, ARREADY_IM, ARREADY_DM, ARREADY_SDMA, ARREADY_DRAM;
+
+//READ DATA0 ROM
+//logic [`AXI_ID_BITS-1:0] RID_IF, RID_MEM, RID_dma_axi;
+logic [`AXI_ID_BITS-1:0] RID_SDMA, RID_DRAM;
+logic [`AXI_IDS_BITS-1:0] RID_IF, RID_MEM, RID_dma_axi, RID_ROM, RID_IM, RID_DM;
+logic [`AXI_DATA_BITS-1:0] RDATA_ROM, RDATA_IF, RDATA_MEM, RDATA_dma_axi, RDATA_IM, RDATA_DM, RDATA_SDMA, RDATA_DRAM;
+logic [1:0] RRESP_ROM, RRESP_IF, RRESP_MEM, RRESP_dma_axi, RRESP_IM, RRESP_DM, RRESP_SDMA, RRESP_DRAM;
+logic RLAST_ROM, RLAST_IF, RLAST_MEM, RLAST_dma_axi, RLAST_IM, RLAST_DM, RLAST_SDMA, RLAST_DRAM;
+logic RVALID_ROM, RVALID_IF, RVALID_MEM, RVALID_dma_axi, RVALID_IM, RVALID_DM, RVALID_SDMA, RVALID_DRAM;
+logic RREADY_ROM, RREADY_IF, RREADY_MEM, RREADY_dma_axi, RREADY_IM, RREADY_DM, RREADY_SDMA, RREADY_DRAM;
+
+	
+//WRITE ADDRESS dma
+//logic [`AXI_ID_BITS-1:0] AWID_MEM, AWID_MDMA; //, AWID_IM, AWID_DM, AWID_SDMA, AWID_WDT, AWID_DRAM;
+logic [`AXI_IDS_BITS-1:0] AWID_IM, AWID_DM, AWID_SDMA, AWID_WDT, AWID_DRAM, AWID_MEM, AWID_MDMA;
+logic [`AXI_ADDR_BITS-1:0] AWADDR_MEM, AWADDR_MDMA, AWADDR_IM, AWADDR_DM, AWADDR_SDMA, AWADDR_WDT, AWADDR_DRAM;
+logic [`AXI_LEN_BITS-1:0] AWLEN_MEM, AWLEN_MDMA, AWLEN_IM, AWLEN_DM, AWLEN_SDMA, AWLEN_WDT, AWLEN_DRAM;
+logic [`AXI_SIZE_BITS-1:0] AWSIZE_MEM, AWSIZE_MDMA, AWSIZE_IM, AWSIZE_DM, AWSIZE_SDMA, AWSIZE_WDT, AWSIZE_DRAM;
+logic [1:0] AWBURST_MEM, AWBURST_MDMA, AWBURST_IM, AWBURST_DM, AWBURST_SDMA, AWBURST_WDT, AWBURST_DRAM;
+logic AWVALID_MEM, AWVALID_MDMA, AWVALID_IM, AWVALID_DM, AWVALID_SDMA, AWVALID_WDT, AWVALID_DRAM;
+logic AWREADY_MEM, AWREADY_MDMA, AWREADY_IM, AWREADY_DM, AWREADY_SDMA, AWREADY_WDT, AWREADY_DRAM;
+
+//WRITE DATA dma
+logic [`AXI_DATA_BITS-1:0] WDATA_MEM, WDATA_MDMA, WDATA_IM, WDATA_DM, WDATA_SDMA, WDATA_WDT, WDATA_DRAM;
+logic [`AXI_STRB_BITS-1:0] WSTRB_MEM, WSTRB_MDMA, WSTRB_IM, WSTRB_DM, WSTRB_SDMA, WSTRB_WDT, WSTRB_DRAM;
+logic WLAST_MEM, WLAST_MDMA, WLAST_IM, WLAST_DM, WLAST_SDMA, WLAST_WDT, WLAST_DRAM;
+logic WVALID_MEM, WVALID_MDMA, WVALID_IM, WVALID_DM, WVALID_SDMA, WVALID_WDT, WVALID_DRAM;
+logic WREADY_MEM, WREADY_MDMA, WREADY_IM, WREADY_DM, WREADY_SDMA, WREADY_WDT, WREADY_DRAM;
+
+//WRITE RESPONSE dma
+//logic [`AXI_ID_BITS-1:0] BID_MEM, BID_MDMA; //, BID_IM, BID_DM, BID_SDMA, BID_WDT, BID_DRAM;
+logic [`AXI_IDS_BITS-1:0] BID_MEM, BID_MDMA, BID_IM, BID_DM, BID_SDMA, BID_WDT, BID_DRAM;
+logic [1:0] BRESP_MEM, BRESP_MDMA, BRESP_IM, BRESP_DM, BRESP_SDMA, BRESP_WDT, BRESP_DRAM;
+logic BVALID_MEM, BVALID_MDMA, BVALID_IM, BVALID_DM, BVALID_SDMA, BVALID_WDT, BVALID_DRAM;
+logic BREADY_MEM, BREADY_MDMA, BREADY_IM, BREADY_DM, BREADY_SDMA, BREADY_WDT, BREADY_DRAM;
+//logic [3:0] ARID_ROM_replace;
+
+logic [3:0] RID_ROM_replace, RID_IM_replace, RID_DM_replace;
+wire WTO_valid;
+
+synchronizer wto_sync(
+	.clk(cpu_clk),
+	.rst_n(cpu_rstn),
+	.D(WTO_WDT),
+	.Q(WTO_valid)
+);
+	always_ff@(posedge cpu_clk)begin
+		if(!cpu_rstn)begin
+			WTO <= 1'b0;
+		end else begin
+			if(WTO_valid)begin
+				WTO <= 1'b1;
+			end else begin
+				WTO <= 1'b0;
+			end
+		end
+	end	
+
+	always_comb begin
+		//ARID_ROM = {4'd0, ARID_ROM_replace};
+		RID_ROM = {4'd0, RID_ROM_replace};
+		RID_IM = {4'd0, RID_IM_replace};
+		RID_DM = {4'd0, RID_DM_replace};
+	end
+
+	cdc_read_wrapper CPU_im_read(
+		.clk(cpu_clk),
+		.clk2(axi_clk),
+		.rst(cpu_rstn),
+		.rst2(axi_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_M0),  //4
+		.ARADDR_M(ARADDR_M0), //32
+		.ARLEN_M(ARLEN_M0), //32
+		.ARSIZE_M(ARSIZE_M0), //3
+		.ARBURST_M(ARBURST_M0), //2
+		.ARVALID_M(ARVALID_M0),  //1
+		.ARREADY_M(ARREADY_M0),
+
+		// AR slave channel
+		.ARID_S(ARID_IF),
+		.ARADDR_S(ARADDR_IF),
+		.ARLEN_S(ARLEN_IF),
+		.ARSIZE_S(ARSIZE_IF),
+		.ARBURST_S(ARBURST_IF),
+		.ARVALID_S(ARVALID_IF),
+		.ARREADY_S(ARREADY_IF),
+
+		// R master
+		.RID_M(RID_M0),
+		.RDATA_M(RDATA_M0),
+		.RRESP_M(RRESP_M0),
+		.RLAST_M(RLAST_M0),
+		.RVALID_M(RVALID_M0),
+		.RREADY_M(RREADY_M0),
+
+		// R slave
+		.RID_S(RID_IF),  //8
+		.RDATA_S(RDATA_IF),
+		.RRESP_S(RRESP_IF),
+		.RLAST_S(RLAST_IF),
+		.RVALID_S(RVALID_IF),
+		.RREADY_S(RREADY_IF)
+	);
+
+	cdc_read_wrapper CPU_dm_read(
+		.clk(cpu_clk),
+		.clk2(axi_clk),
+		.rst(cpu_rstn),
+		.rst2(axi_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_M1),  //4
+		.ARADDR_M(ARADDR_M1), //32
+		.ARLEN_M(ARLEN_M1), //32
+		.ARSIZE_M(ARSIZE_M1), //3
+		.ARBURST_M(ARBURST_M1), //2
+		.ARVALID_M(ARVALID_M1),  //1
+		.ARREADY_M(ARREADY_M1),
+
+		// AR slave channel
+		.ARID_S(ARID_MEM),
+		.ARADDR_S(ARADDR_MEM),
+		.ARLEN_S(ARLEN_MEM),
+		.ARSIZE_S(ARSIZE_MEM),
+		.ARBURST_S(ARBURST_MEM),
+		.ARVALID_S(ARVALID_MEM),
+		.ARREADY_S(ARREADY_MEM),
+
+		// R master
+		.RID_M(RID_M1),
+		.RDATA_M(RDATA_M1),
+		.RRESP_M(RRESP_M1),
+		.RLAST_M(RLAST_M1),
+		.RVALID_M(RVALID_M1),
+		.RREADY_M(RREADY_M1),
+
+		// R slave
+		.RID_S(RID_MEM),
+		.RDATA_S(RDATA_MEM),
+		.RRESP_S(RRESP_MEM),
+		.RLAST_S(RLAST_MEM),
+		.RVALID_S(RVALID_MEM),
+		.RREADY_S(RREADY_MEM)
+	);
+
+	cdc_read_wrapper DMA_read(
+		.clk(cpu_clk),
+		.clk2(axi_clk),
+		.rst(cpu_rstn),
+		.rst2(axi_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_dma),  //4
+		.ARADDR_M(ARADDR_dma), //32
+		.ARLEN_M(ARLEN_dma), //32
+		.ARSIZE_M(ARSIZE_dma), //3
+		.ARBURST_M(ARBURST_dma), //2
+		.ARVALID_M(ARVALID_dma),  //1
+		.ARREADY_M(ARREADY_dma),
+
+		// AR slave channel
+		.ARID_S(ARID_dma_axi),
+		.ARADDR_S(ARADDR_dma_axi),
+		.ARLEN_S(ARLEN_dma_axi),
+		.ARSIZE_S(ARSIZE_dma_axi),
+		.ARBURST_S(ARBURST_dma_axi),
+		.ARVALID_S(ARVALID_dma_axi),
+		.ARREADY_S(ARREADY_dma_axi),
+
+		// R master
+		.RID_M(RID_dma),
+		.RDATA_M(RDATA_dma),
+		.RRESP_M(RRESP_dma),
+		.RLAST_M(RLAST_dma),
+		.RVALID_M(RVALID_dma),
+		.RREADY_M(RREADY_dma),
+
+		// R slave
+		.RID_S(RID_dma_axi),
+		.RDATA_S(RDATA_dma_axi),
+		.RRESP_S(RRESP_dma_axi),
+		.RLAST_S(RLAST_dma_axi),
+		.RVALID_S(RVALID_dma_axi),
+		.RREADY_S(RREADY_dma_axi)
+	);
+	
+
+	cdc_read_wrapper rom_read(
+		.clk(axi_clk),
+		.clk2(rom_clk),
+		.rst(axi_rstn),
+		.rst2(rom_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_ROM[3:0]),  //4
+		.ARADDR_M(ARADDR_ROM), //32
+		.ARLEN_M(ARLEN_ROM), //32
+		.ARSIZE_M(ARSIZE_ROM), //3
+		.ARBURST_M(ARBURST_ROM), //2
+		.ARVALID_M(ARVALID_ROM),  //1
+		.ARREADY_M(ARREADY_ROM),
+
+		// AR slave channel
+		.ARID_S(ARID_S0),
+		.ARADDR_S(ARADDR_S0),
+		.ARLEN_S(ARLEN_S0),
+		.ARSIZE_S(ARSIZE_S0),
+		.ARBURST_S(ARBURST_S0),
+		.ARVALID_S(ARVALID_S0),
+		.ARREADY_S(ARREADY_S0),
+
+		// R master
+		.RID_M(RID_ROM_replace),
+		.RDATA_M(RDATA_ROM),
+		.RRESP_M(RRESP_ROM),
+		.RLAST_M(RLAST_ROM),
+		.RVALID_M(RVALID_ROM),
+		.RREADY_M(RREADY_ROM),
+
+		// R slave
+		.RID_S(RID_S0),
+		.RDATA_S(RDATA_S0),
+		.RRESP_S(RRESP_S0),
+		.RLAST_S(RLAST_S0),
+		.RVALID_S(RVALID_S0),
+		.RREADY_S(RREADY_S0)
+	);
+
+	cdc_read_wrapper im_read(
+		.clk(axi_clk),
+		.clk2(cpu_clk),
+		.rst(axi_rstn),
+		.rst2(cpu_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_IM[3:0]),  //4
+		.ARADDR_M(ARADDR_IM), //32
+		.ARLEN_M(ARLEN_IM), //32
+		.ARSIZE_M(ARSIZE_IM), //3
+		.ARBURST_M(ARBURST_IM), //2
+		.ARVALID_M(ARVALID_IM),  //1
+		.ARREADY_M(ARREADY_IM),
+
+		// AR slave channel
+		.ARID_S(ARID_S1),
+		.ARADDR_S(ARADDR_S1),
+		.ARLEN_S(ARLEN_S1),
+		.ARSIZE_S(ARSIZE_S1),
+		.ARBURST_S(ARBURST_S1),
+		.ARVALID_S(ARVALID_S1),
+		.ARREADY_S(ARREADY_S1),
+
+		// R master
+		.RID_M(RID_IM_replace),
+		.RDATA_M(RDATA_IM),
+		.RRESP_M(RRESP_IM),
+		.RLAST_M(RLAST_IM),
+		.RVALID_M(RVALID_IM),
+		.RREADY_M(RREADY_IM),
+
+		// R slave
+		.RID_S(RID_S1),
+		.RDATA_S(RDATA_S1),
+		.RRESP_S(RRESP_S1),
+		.RLAST_S(RLAST_S1),
+		.RVALID_S(RVALID_S1),
+		.RREADY_S(RREADY_S1)
+	);
+
+	cdc_read_wrapper dm_read(
+		.clk(axi_clk),
+		.clk2(cpu_clk),
+		.rst(axi_rstn),
+		.rst2(cpu_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_DM[3:0]),  //4
+		.ARADDR_M(ARADDR_DM), //32
+		.ARLEN_M(ARLEN_DM), //32
+		.ARSIZE_M(ARSIZE_DM), //3
+		.ARBURST_M(ARBURST_DM), //2
+		.ARVALID_M(ARVALID_DM),  //1
+		.ARREADY_M(ARREADY_DM),
+
+		// AR slave channel
+		.ARID_S(ARID_S2),
+		.ARADDR_S(ARADDR_S2),
+		.ARLEN_S(ARLEN_S2),
+		.ARSIZE_S(ARSIZE_S2),
+		.ARBURST_S(ARBURST_S2),
+		.ARVALID_S(ARVALID_S2),
+		.ARREADY_S(ARREADY_S2),
+
+		// R master
+		.RID_M(RID_DM_replace),
+		.RDATA_M(RDATA_DM),
+		.RRESP_M(RRESP_DM),
+		.RLAST_M(RLAST_DM),
+		.RVALID_M(RVALID_DM),
+		.RREADY_M(RREADY_DM),
+
+		// R slave
+		.RID_S(RID_S2),
+		.RDATA_S(RDATA_S2),
+		.RRESP_S(RRESP_S2),
+		.RLAST_S(RLAST_S2),
+		.RVALID_S(RVALID_S2),
+		.RREADY_S(RREADY_S2)
+	);
+
+	cdc_read_wrapper sdma_read(
+		.clk(axi_clk),
+		.clk2(cpu_clk),
+		.rst(axi_rstn),
+		.rst2(cpu_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_SDMA[3:0]),  //4
+		.ARADDR_M(ARADDR_SDMA), //32
+		.ARLEN_M(ARLEN_SDMA), //32
+		.ARSIZE_M(ARSIZE_SDMA), //3
+		.ARBURST_M(ARBURST_SDMA), //2
+		.ARVALID_M(ARVALID_SDMA),  //1
+		.ARREADY_M(ARREADY_SDMA),
+
+		// AR slave channel
+		.ARID_S(ARID_S3),
+		.ARADDR_S(ARADDR_S3),
+		.ARLEN_S(ARLEN_S3),
+		.ARSIZE_S(ARSIZE_S3),
+		.ARBURST_S(ARBURST_S3),
+		.ARVALID_S(ARVALID_S3),
+		.ARREADY_S(ARREADY_S3),
+
+		// R master
+		.RID_M(RID_SDMA[3:0]),
+		.RDATA_M(RDATA_SDMA),
+		.RRESP_M(RRESP_SDMA),
+		.RLAST_M(RLAST_SDMA),
+		.RVALID_M(RVALID_SDMA),
+		.RREADY_M(RREADY_SDMA),
+
+		// R slave
+		.RID_S(RID_S3),
+		.RDATA_S(RDATA_S3),
+		.RRESP_S(RRESP_S3),
+		.RLAST_S(RLAST_S3),
+		.RVALID_S(RVALID_S3),
+		.RREADY_S(RREADY_S3)
+	);
+
+	cdc_read_wrapper dram_read(
+		.clk(axi_clk),
+		.clk2(dram_clk),
+		.rst(axi_rstn),
+		.rst2(dram_rstn),
+
+		// AR master channel
+	  	.ARID_M(ARID_DRAM[3:0]),  //4
+		.ARADDR_M(ARADDR_DRAM), //32
+		.ARLEN_M(ARLEN_DRAM), //32
+		.ARSIZE_M(ARSIZE_DRAM), //3
+		.ARBURST_M(ARBURST_DRAM), //2
+		.ARVALID_M(ARVALID_DRAM),  //1
+		.ARREADY_M(ARREADY_DRAM),
+
+		// AR slave channel
+		.ARID_S(ARID_S5),
+		.ARADDR_S(ARADDR_S5),
+		.ARLEN_S(ARLEN_S5),
+		.ARSIZE_S(ARSIZE_S5),
+		.ARBURST_S(ARBURST_S5),
+		.ARVALID_S(ARVALID_S5),
+		.ARREADY_S(ARREADY_S5),
+
+		// R master
+		.RID_M(RID_DRAM[3:0]),
+		.RDATA_M(RDATA_DRAM),
+		.RRESP_M(RRESP_DRAM),
+		.RLAST_M(RLAST_DRAM),
+		.RVALID_M(RVALID_DRAM),
+		.RREADY_M(RREADY_DRAM),
+
+		// R slave
+		.RID_S(RID_S5),
+		.RDATA_S(RDATA_S5),
+		.RRESP_S(RRESP_S5),
+		.RLAST_S(RLAST_S5),
+		.RVALID_S(RVALID_S5),
+		.RREADY_S(RREADY_S5)
+	);
+	logic [7:0] BID_replace, BID_replace_dma, AWID_replace_m1, RID_DMA_replace, RID_DRAM_replace;
+	always_comb begin
+		//BID_replace = {4'd0, BID_M1};
+		BID_M1 = BID_replace[3:0];
+		BID_dma = BID_replace_dma[3:0];
+		//BID_replace_dma = {4'd0, BID_dma};
+		AWID_replace_m1 = {4'd0, AWID_M1};
+		RID_DMA_replace = {4'd0, RID_SDMA};
+		RID_DRAM_replace = {4'd0, RID_DRAM[3:0]};
+	end	
+
+	cdc_write_wrapper cpu_im_write(
+		.clk(cpu_clk),
+		.clk2(axi_clk),
+		.rst(cpu_rstn),
+		.rst2(axi_rstn),
+		
+		//WRITE ADDRESS dma
+		.AWID_M(AWID_replace_m1),
+		.AWADDR_M(AWADDR_M1),
+		.AWLEN_M(AWLEN_M1),
+		.AWSIZE_M(AWSIZE_M1),
+		.AWBURST_M(AWBURST_M1),
+		.AWVALID_M(AWVALID_M1),
+		.AWREADY_M(AWREADY_M1),
+		
+		//WRITE DATA dma
+		.WDATA_M(WDATA_M1),
+		.WSTRB_M(WSTRB_M1),
+		.WLAST_M(WLAST_M1),
+		.WVALID_M(WVALID_M1),
+		.WREADY_M(WREADY_M1),
+		
+		//WRITE RESPONSE dma
+		.BID_M(BID_replace),
+		.BRESP_M(BRESP_M1),
+		.BVALID_M(BVALID_M1),
+		.BREADY_M(BREADY_M1),
+
+
+		//WRITE ADDRESS  DRAM
+		.AWID_S(AWID_MEM),
+		.AWADDR_S(AWADDR_MEM),
+		.AWLEN_S(AWLEN_MEM),
+		.AWSIZE_S(AWSIZE_MEM),
+		.AWBURST_S(AWBURST_MEM),
+		.AWVALID_S(AWVALID_MEM),
+		.AWREADY_S(AWREADY_MEM),
+		
+		//WRITE DATA DRAM
+		.WDATA_S(WDATA_MEM),
+		.WSTRB_S(WSTRB_MEM),
+		.WLAST_S(WLAST_MEM),
+		.WVALID_S(WVALID_MEM),
+		.WREADY_S(WREADY_MEM),
+		
+		//WRITE RESPONSE DRAM
+		.BID_S(BID_MEM),
+		.BRESP_S(BRESP_MEM),
+		.BVALID_S(BVALID_MEM),
+		.BREADY_S(BREADY_MEM)
+	);
+
+	cdc_write_wrapper dma_write(
+		.clk(cpu_clk),
+		.clk2(axi_clk),
+		.rst(cpu_rstn),
+		.rst2(axi_rstn),
+		
+		//WRITE ADDRESS dma
+		.AWID_M({4'd0, AWID_dma}),
+		.AWADDR_M(AWADDR_dma),
+		.AWLEN_M(AWLEN_dma),
+		.AWSIZE_M(AWSIZE_dma),
+		.AWBURST_M(AWBURST_dma),
+		.AWVALID_M(AWVALID_dma),
+		.AWREADY_M(AWREADY_dma),
+		
+		//WRITE DATA dma
+		.WDATA_M(WDATA_dma),
+		.WSTRB_M(WSTRB_dma),
+		.WLAST_M(WLAST_dma),
+		.WVALID_M(WVALID_dma),
+		.WREADY_M(WREADY_dma),
+		
+		//WRITE RESPONSE dma
+		.BID_M(BID_replace_dma),
+		.BRESP_M(BRESP_dma),
+		.BVALID_M(BVALID_dma),
+		.BREADY_M(BREADY_dma),
+
+
+		//WRITE ADDRESS  DRAM
+		.AWID_S(AWID_MDMA),
+		.AWADDR_S(AWADDR_MDMA),
+		.AWLEN_S(AWLEN_MDMA),
+		.AWSIZE_S(AWSIZE_MDMA),
+		.AWBURST_S(AWBURST_MDMA),
+		.AWVALID_S(AWVALID_MDMA),
+		.AWREADY_S(AWREADY_MDMA),
+		
+		//WRITE DATA DRAM
+		.WDATA_S(WDATA_MDMA),
+		.WSTRB_S(WSTRB_MDMA),
+		.WLAST_S(WLAST_MDMA),
+		.WVALID_S(WVALID_MDMA),
+		.WREADY_S(WREADY_MDMA),
+		
+		//WRITE RESPONSE DRAM
+		.BID_S(BID_MDMA),
+		.BRESP_S(BRESP_MDMA),
+		.BVALID_S(BVALID_MDMA),
+		.BREADY_S(BREADY_MDMA)
+	);
+
+	cdc_write_wrapper IM_write(
+		.clk(axi_clk),
+		.clk2(cpu_clk),
+		.rst(axi_rstn),
+		.rst2(cpu_rstn),
+		
+		//WRITE ADDRESS dma
+		.AWID_M(AWID_IM),
+		.AWADDR_M(AWADDR_IM),
+		.AWLEN_M(AWLEN_IM),
+		.AWSIZE_M(AWSIZE_IM),
+		.AWBURST_M(AWBURST_IM),
+		.AWVALID_M(AWVALID_IM),
+		.AWREADY_M(AWREADY_IM),
+		
+		//WRITE DATA dma
+		.WDATA_M(WDATA_IM),
+		.WSTRB_M(WSTRB_IM),
+		.WLAST_M(WLAST_IM),
+		.WVALID_M(WVALID_IM),
+		.WREADY_M(WREADY_IM),
+		
+		//WRITE RESPONSE dma
+		.BID_M(BID_IM),
+		.BRESP_M(BRESP_IM),
+		.BVALID_M(BVALID_IM),
+		.BREADY_M(BREADY_IM),
+
+
+		//WRITE ADDRESS  DRAM
+		.AWID_S(AWID_S1),
+		.AWADDR_S(AWADDR_S1),
+		.AWLEN_S(AWLEN_S1),
+		.AWSIZE_S(AWSIZE_S1),
+		.AWBURST_S(AWBURST_S1),
+		.AWVALID_S(AWVALID_S1),
+		.AWREADY_S(AWREADY_S1),
+		
+		//WRITE DATA DRAM
+		.WDATA_S(WDATA_S1),
+		.WSTRB_S(WSTRB_S1),
+		.WLAST_S(WLAST_S1),
+		.WVALID_S(WVALID_S1),
+		.WREADY_S(WREADY_S1),
+		
+		//WRITE RESPONSE DRAM
+		.BID_S(BID_S1),
+		.BRESP_S(BRESP_S1),
+		.BVALID_S(BVALID_S1),
+		.BREADY_S(BREADY_S1)
+	);
+
+	cdc_write_wrapper DM_write(
+		.clk(axi_clk),
+		.clk2(cpu_clk),
+		.rst(axi_rstn),
+		.rst2(cpu_rstn),
+		
+		//WRITE ADDRESS dma
+		.AWID_M(AWID_DM),
+		.AWADDR_M(AWADDR_DM),
+		.AWLEN_M(AWLEN_DM),
+		.AWSIZE_M(AWSIZE_DM),
+		.AWBURST_M(AWBURST_DM),
+		.AWVALID_M(AWVALID_DM),
+		.AWREADY_M(AWREADY_DM),
+		
+		//WRITE DATA dma
+		.WDATA_M(WDATA_DM),
+		.WSTRB_M(WSTRB_DM),
+		.WLAST_M(WLAST_DM),
+		.WVALID_M(WVALID_DM),
+		.WREADY_M(WREADY_DM),
+		
+		//WRITE RESPONSE dma
+		.BID_M(BID_DM),
+		.BRESP_M(BRESP_DM),
+		.BVALID_M(BVALID_DM),
+		.BREADY_M(BREADY_DM),
+
+
+		//WRITE ADDRESS  DRAM
+		.AWID_S(AWID_S2),
+		.AWADDR_S(AWADDR_S2),
+		.AWLEN_S(AWLEN_S2),
+		.AWSIZE_S(AWSIZE_S2),
+		.AWBURST_S(AWBURST_S2),
+		.AWVALID_S(AWVALID_S2),
+		.AWREADY_S(AWREADY_S2),
+		
+		//WRITE DATA DRAM
+		.WDATA_S(WDATA_S2),
+		.WSTRB_S(WSTRB_S2),
+		.WLAST_S(WLAST_S2),
+		.WVALID_S(WVALID_S2),
+		.WREADY_S(WREADY_S2),
+		
+		//WRITE RESPONSE DRAM
+		.BID_S(BID_S2),
+		.BRESP_S(BRESP_S2),
+		.BVALID_S(BVALID_S2),
+		.BREADY_S(BREADY_S2)
+	);
+
+	cdc_write_wrapper DMA_write_slave(
+		.clk(axi_clk),
+		.clk2(cpu_clk),
+		.rst(axi_rstn),
+		.rst2(cpu_rstn),
+		
+		//WRITE ADDRESS dma
+		.AWID_M(AWID_SDMA),
+		.AWADDR_M(AWADDR_SDMA),
+		.AWLEN_M(AWLEN_SDMA),
+		.AWSIZE_M(AWSIZE_SDMA),
+		.AWBURST_M(AWBURST_SDMA),
+		.AWVALID_M(AWVALID_SDMA),
+		.AWREADY_M(AWREADY_SDMA),
+		
+		//WRITE DATA dma
+		.WDATA_M(WDATA_SDMA),
+		.WSTRB_M(WSTRB_SDMA),
+		.WLAST_M(WLAST_SDMA),
+		.WVALID_M(WVALID_SDMA),
+		.WREADY_M(WREADY_SDMA),
+		
+		//WRITE RESPONSE dma
+		.BID_M(BID_SDMA),
+		.BRESP_M(BRESP_SDMA),
+		.BVALID_M(BVALID_SDMA),
+		.BREADY_M(BREADY_SDMA),
+
+
+		//WRITE ADDRESS  DRAM
+		.AWID_S(AWID_S3),
+		.AWADDR_S(AWADDR_S3),
+		.AWLEN_S(AWLEN_S3),
+		.AWSIZE_S(AWSIZE_S3),
+		.AWBURST_S(AWBURST_S3),
+		.AWVALID_S(AWVALID_S3),
+		.AWREADY_S(AWREADY_S3),
+		
+		//WRITE DATA DRAM
+		.WDATA_S(WDATA_S3),
+		.WSTRB_S(WSTRB_S3),
+		.WLAST_S(WLAST_S3),
+		.WVALID_S(WVALID_S3),
+		.WREADY_S(WREADY_S3),
+		
+		//WRITE RESPONSE DRAM
+		.BID_S(BID_S3),
+		.BRESP_S(BRESP_S3),
+		.BVALID_S(BVALID_S3),
+		.BREADY_S(BREADY_S3) 
+	);
+
+	cdc_write_wrapper WDT_write(
+		.clk(axi_clk),
+		.clk2(rom_clk),
+		.rst(axi_rstn),
+		.rst2(rom_rstn),
+		
+		//WRITE ADDRESS dma
+		.AWID_M(AWID_WDT),
+		.AWADDR_M(AWADDR_WDT),
+		.AWLEN_M(AWLEN_WDT),
+		.AWSIZE_M(AWSIZE_WDT),
+		.AWBURST_M(AWBURST_WDT),
+		.AWVALID_M(AWVALID_WDT),
+		.AWREADY_M(AWREADY_WDT),
+		
+		//WRITE DATA dma
+		.WDATA_M(WDATA_WDT),
+		.WSTRB_M(WSTRB_WDT),
+		.WLAST_M(WLAST_WDT),
+		.WVALID_M(WVALID_WDT),
+		.WREADY_M(WREADY_WDT),
+		
+		//WRITE RESPONSE dma
+		.BID_M(BID_WDT),
+		.BRESP_M(BRESP_WDT),
+		.BVALID_M(BVALID_WDT),
+		.BREADY_M(BREADY_WDT),
+
+
+		//WRITE ADDRESS  DRAM
+		.AWID_S(AWID_S4),
+		.AWADDR_S(AWADDR_S4),
+		.AWLEN_S(AWLEN_S4),
+		.AWSIZE_S(AWSIZE_S4),
+		.AWBURST_S(AWBURST_S4),
+		.AWVALID_S(AWVALID_S4),
+		.AWREADY_S(AWREADY_S4),
+		
+		//WRITE DATA DRAM
+		.WDATA_S(WDATA_S4),
+		.WSTRB_S(WSTRB_S4),
+		.WLAST_S(WLAST_S4),
+		.WVALID_S(WVALID_S4),
+		.WREADY_S(WREADY_S4),
+		
+		//WRITE RESPONSE DRAM
+		.BID_S(BID_S4),
+		.BRESP_S(BRESP_S4),
+		.BVALID_S(BVALID_S4),
+		.BREADY_S(BREADY_S4)
+	);
+
+	cdc_write_wrapper DRAM_write(
+		.clk(axi_clk),
+		.clk2(dram_clk),
+		.rst(axi_rstn),
+		.rst2(dram_rstn),
+		
+		//WRITE ADDRESS dma
+		.AWID_M(AWID_DRAM),
+		.AWADDR_M(AWADDR_DRAM),
+		.AWLEN_M(AWLEN_DRAM),
+		.AWSIZE_M(AWSIZE_DRAM),
+		.AWBURST_M(AWBURST_DRAM),
+		.AWVALID_M(AWVALID_DRAM),
+		.AWREADY_M(AWREADY_DRAM),
+		
+		//WRITE DATA dma
+		.WDATA_M(WDATA_DRAM),
+		.WSTRB_M(WSTRB_DRAM),
+		.WLAST_M(WLAST_DRAM),
+		.WVALID_M(WVALID_DRAM),
+		.WREADY_M(WREADY_DRAM),
+		
+		//WRITE RESPONSE dma
+		.BID_M(BID_DRAM),
+		.BRESP_M(BRESP_DRAM),
+		.BVALID_M(BVALID_DRAM),
+		.BREADY_M(BREADY_DRAM),
+
+
+		//WRITE ADDRESS  DRAM
+		.AWID_S(AWID_S5),
+		.AWADDR_S(AWADDR_S5),
+		.AWLEN_S(AWLEN_S5),
+		.AWSIZE_S(AWSIZE_S5),
+		.AWBURST_S(AWBURST_S5),
+		.AWVALID_S(AWVALID_S5),
+		.AWREADY_S(AWREADY_S5),
+		
+		//WRITE DATA DRAM
+		.WDATA_S(WDATA_S5),
+		.WSTRB_S(WSTRB_S5),
+		.WLAST_S(WLAST_S5),
+		.WVALID_S(WVALID_S5),
+		.WREADY_S(WREADY_S5),
+		
+		//WRITE RESPONSE DRAM
+		.BID_S(BID_S5),
+		.BRESP_S(BRESP_S5),
+		.BVALID_S(BVALID_S5),
+		.BREADY_S(BREADY_S5) 
+	);
+
+
+	AXI axi(
+
+	.axi_clk(axi_clk),
+	.axi_rstn(axi_rstn),
+
+
+	//SLAVE INTERFACE FOR MASTERS
+	
+	//WRITE ADDRESS dma
+	.AWID_dma(AWID_MDMA[3:0]),
+	.AWADDR_dma(AWADDR_MDMA),
+	.AWLEN_dma(AWLEN_MDMA),
+	.AWSIZE_dma(AWSIZE_MDMA),
+	.AWBURST_dma(AWBURST_MDMA),
+	.AWVALID_dma(AWVALID_MDMA),
+	.AWREADY_dma(AWREADY_MDMA),
+	
+	//WRITE DATA dma
+	.WDATA_dma(WDATA_MDMA),
+	.WSTRB_dma(WSTRB_MDMA),
+	.WLAST_dma(WLAST_MDMA),
+	.WVALID_dma(WVALID_MDMA),
+	.WREADY_dma(WREADY_MDMA),
+	
+	//WRITE RESPONSE dma
+	.BID_dma(BID_MDMA[3:0]),
+	.BRESP_dma(BRESP_MDMA),
+	.BVALID_dma(BVALID_MDMA),
+	.BREADY_dma(BREADY_MDMA),
+
+	//WRITE ADDRESS
+	.AWID_M1(AWID_MEM[3:0]),
+	.AWADDR_M1(AWADDR_MEM),
+	.AWLEN_M1(AWLEN_MEM),
+	.AWSIZE_M1(AWSIZE_MEM),
+	.AWBURST_M1(AWBURST_MEM),
+	.AWVALID_M1(AWVALID_MEM),
+	.AWREADY_M1(AWREADY_MEM),
+	
+	//WRITE DATA
+	.WDATA_M1(WDATA_MEM),
+	.WSTRB_M1(WSTRB_MEM),
+	.WLAST_M1(WLAST_MEM),
+	.WVALID_M1(WVALID_MEM),
+	.WREADY_M1(WREADY_MEM),
+	
+	//WRITE RESPONSE
+	.BID_M1(BID_MEM[3:0]),
+	.BRESP_M1(BRESP_MEM),
+	.BVALID_M1(BVALID_MEM),
+	.BREADY_M1(BREADY_MEM),
+
+	//READ ADDRESS dma
+	.ARID_dma(ARID_dma_axi[3:0]),
+	.ARADDR_dma(ARADDR_dma_axi),
+	.ARLEN_dma(ARLEN_dma_axi),
+	.ARSIZE_dma(ARSIZE_dma_axi),
+	.ARBURST_dma(ARBURST_dma_axi),
+	.ARVALID_dma(ARVALID_dma_axi),
+	.ARREADY_dma(ARREADY_dma_axi),
+	
+	//READ DATA dma
+	.RID_dma(RID_dma_axi[3:0]),
+	.RDATA_dma(RDATA_dma_axi),
+	.RRESP_dma(RRESP_dma_axi),
+	.RLAST_dma(RLAST_dma_axi),
+	.RVALID_dma(RVALID_dma_axi),
+	.RREADY_dma(RREADY_dma_axi),
+
+	//READ ADDRESS0
+	.ARID_M0(ARID_IF[3:0]),
+	.ARADDR_M0(ARADDR_IF),
+	.ARLEN_M0(ARLEN_IF),
+	.ARSIZE_M0(ARSIZE_IF),
+	.ARBURST_M0(ARBURST_IF),
+	.ARVALID_M0(ARVALID_IF),
+	.ARREADY_M0(ARREADY_IF),
+	
+	//READ DATA0
+	.RID_M0(RID_IF[3:0]),
+	.RDATA_M0(RDATA_IF),
+	.RRESP_M0(RRESP_IF),
+	.RLAST_M0(RLAST_IF),
+	.RVALID_M0(RVALID_IF),
+	.RREADY_M0(RREADY_IF),
+	
+	//READ ADDRESS1
+	.ARID_M1(ARID_MEM[3:0]),
+	.ARADDR_M1(ARADDR_MEM),
+	.ARLEN_M1(ARLEN_MEM),
+	.ARSIZE_M1(ARSIZE_MEM),
+	.ARBURST_M1(ARBURST_MEM),
+	.ARVALID_M1(ARVALID_MEM),
+	.ARREADY_M1(ARREADY_MEM),
+	
+	//READ DATA1
+	.RID_M1(RID_MEM[3:0]),
+	.RDATA_M1(RDATA_MEM),
+	.RRESP_M1(RRESP_MEM),
+	.RLAST_M1(RLAST_MEM),
+	.RVALID_M1(RVALID_MEM),
+	.RREADY_M1(RREADY_MEM),
+
+	//MASTER INTERFACE FOR SLAVES
+	
+	//WRITE ADDRESS  IM
+	.AWID_S1(AWID_IM),
+	.AWADDR_S1(AWADDR_IM),
+	.AWLEN_S1(AWLEN_IM),
+	.AWSIZE_S1(AWSIZE_IM),
+	.AWBURST_S1(AWBURST_IM),
+	.AWVALID_S1(AWVALID_IM),
+	.AWREADY_S1(AWREADY_IM),
+	
+	//WRITE DATA IM
+	.WDATA_S1(WDATA_IM),
+	.WSTRB_S1(WSTRB_IM),
+	.WLAST_S1(WLAST_IM),
+	.WVALID_S1(WVALID_IM),
+	.WREADY_S1(WREADY_IM),
+	
+	//WRITE RESPONSE IM
+	.BID_S1(BID_IM),
+	.BRESP_S1(BRESP_IM),
+	.BVALID_S1(BVALID_IM),
+	.BREADY_S1(BREADY_IM),
+
+	//WRITE ADDRESS  DM
+	.AWID_S2(AWID_DM),
+	.AWADDR_S2(AWADDR_DM),
+	.AWLEN_S2(AWLEN_DM),
+	.AWSIZE_S2(AWSIZE_DM),
+	.AWBURST_S2(AWBURST_DM),
+	.AWVALID_S2(AWVALID_DM),
+	.AWREADY_S2(AWREADY_DM),
+	
+	//WRITE DATA DM
+	.WDATA_S2(WDATA_DM),
+	.WSTRB_S2(WSTRB_DM),
+	.WLAST_S2(WLAST_DM),
+	.WVALID_S2(WVALID_DM),
+	.WREADY_S2(WREADY_DM),
+	
+	//WRITE RESPONSE DM
+	.BID_S2(BID_DM),
+	.BRESP_S2(BRESP_DM),
+	.BVALID_S2(BVALID_DM),
+	.BREADY_S2(BREADY_DM),
+
+	//WRITE ADDRESS  DMA
+	.AWID_S3(AWID_SDMA),
+	.AWADDR_S3(AWADDR_SDMA),
+	.AWLEN_S3(AWLEN_SDMA),
+	.AWSIZE_S3(AWSIZE_SDMA),
+	.AWBURST_S3(AWBURST_SDMA),
+	.AWVALID_S3(AWVALID_SDMA),
+	.AWREADY_S3(AWREADY_SDMA),
+	
+	//WRITE DATA DMA
+	.WDATA_S3(WDATA_SDMA),
+	.WSTRB_S3(WSTRB_SDMA),
+	.WLAST_S3(WLAST_SDMA),
+	.WVALID_S3(WVALID_SDMA),
+	.WREADY_S3(WREADY_SDMA),
+	
+	//WRITE RESPONSE DMA
+	.BID_S3(BID_SDMA),
+	.BRESP_S3(BRESP_SDMA),
+	.BVALID_S3(BVALID_SDMA),
+	.BREADY_S3(BREADY_SDMA),
+
+	//WRITE ADDRESS  WDT
+	.AWID_S4(AWID_WDT),
+	.AWADDR_S4(AWADDR_WDT),
+	.AWLEN_S4(AWLEN_WDT),
+	.AWSIZE_S4(AWSIZE_WDT),
+	.AWBURST_S4(AWBURST_WDT),
+	.AWVALID_S4(AWVALID_WDT),
+	.AWREADY_S4(AWREADY_WDT),
+	
+	//WRITE DATA WDT
+	.WDATA_S4(WDATA_WDT),
+	.WSTRB_S4(WSTRB_WDT),
+	.WLAST_S4(WLAST_WDT),
+	.WVALID_S4(WVALID_WDT),
+	.WREADY_S4(WREADY_WDT),
+	
+	//WRITE RESPONSE WDT
+	.BID_S4(BID_WDT),
+	.BRESP_S4(BRESP_WDT),
+	.BVALID_S4(BVALID_WDT),
+	.BREADY_S4(BREADY_WDT),
+
+	//WRITE ADDRESS  DRAM
+	.AWID_S5(AWID_DRAM),
+	.AWADDR_S5(AWADDR_DRAM),
+	.AWLEN_S5(AWLEN_DRAM),
+	.AWSIZE_S5(AWSIZE_DRAM),
+	.AWBURST_S5(AWBURST_DRAM),
+	.AWVALID_S5(AWVALID_DRAM),
+	.AWREADY_S5(AWREADY_DRAM),
+	
+	//WRITE DATA DRAM
+	.WDATA_S5(WDATA_DRAM),
+	.WSTRB_S5(WSTRB_DRAM),
+	.WLAST_S5(WLAST_DRAM),
+	.WVALID_S5(WVALID_DRAM),
+	.WREADY_S5(WREADY_DRAM),
+	
+	//WRITE RESPONSE DRAM
+	.BID_S5(BID_DRAM),
+	.BRESP_S5(BRESP_DRAM),
+	.BVALID_S5(BVALID_DRAM),
+	.BREADY_S5(BREADY_DRAM),
+
+	
+	//READ ADDRESS0 ROM
+	.ARID_S0(ARID_ROM),
+	.ARADDR_S0(ARADDR_ROM),
+	.ARLEN_S0(ARLEN_ROM),
+	.ARSIZE_S0(ARSIZE_ROM),
+	.ARBURST_S0(ARBURST_ROM),
+	.ARVALID_S0(ARVALID_ROM),
+	.ARREADY_S0(ARREADY_ROM),
+	
+	//READ DATA0 ROM
+	.RID_S0(RID_ROM),
+	.RDATA_S0(RDATA_ROM),
+	.RRESP_S0(RRESP_ROM),
+	.RLAST_S0(RLAST_ROM),
+	.RVALID_S0(RVALID_ROM),
+	.RREADY_S0(RREADY_ROM),
+	
+	//READ ADDRESS IM
+	.ARID_S1(ARID_IM),
+	.ARADDR_S1(ARADDR_IM),
+	.ARLEN_S1(ARLEN_IM),
+	.ARSIZE_S1(ARSIZE_IM),
+	.ARBURST_S1(ARBURST_IM),
+	.ARVALID_S1(ARVALID_IM),
+	.ARREADY_S1(ARREADY_IM),
+	
+	//READ DATA IM
+	.RID_S1(RID_IM),
+	.RDATA_S1(RDATA_IM),
+	.RRESP_S1(RRESP_IM),
+	.RLAST_S1(RLAST_IM),
+	.RVALID_S1(RVALID_IM),
+	.RREADY_S1(RREADY_IM),
+
+	//READ ADDRESS DM
+	.ARID_S2(ARID_DM),
+	.ARADDR_S2(ARADDR_DM),
+	.ARLEN_S2(ARLEN_DM),
+	.ARSIZE_S2(ARSIZE_DM),
+	.ARBURST_S2(ARBURST_DM),
+	.ARVALID_S2(ARVALID_DM),
+	.ARREADY_S2(ARREADY_DM),
+	
+	//READ DATA DM
+	.RID_S2(RID_DM),
+	.RDATA_S2(RDATA_DM),
+	.RRESP_S2(RRESP_DM),
+	.RLAST_S2(RLAST_DM),
+	.RVALID_S2(RVALID_DM),
+	.RREADY_S2(RREADY_DM),
+
+	//READ ADDRESS DMA
+	.ARID_S3(ARID_SDMA),
+	.ARADDR_S3(ARADDR_SDMA),
+	.ARLEN_S3(ARLEN_SDMA),
+	.ARSIZE_S3(ARSIZE_SDMA),
+	.ARBURST_S3(ARBURST_SDMA),
+	.ARVALID_S3(ARVALID_SDMA),
+	.ARREADY_S3(ARREADY_SDMA),
+	
+	//READ DATA DMA
+	.RID_S3(RID_DMA_replace),
+	.RDATA_S3(RDATA_SDMA),
+	.RRESP_S3(RRESP_SDMA),
+	.RLAST_S3(RLAST_SDMA),
+	.RVALID_S3(RVALID_SDMA),
+	.RREADY_S3(RREADY_SDMA),
+
+	//READ ADDRESS DRAM
+	.ARID_S5(ARID_DRAM),
+	.ARADDR_S5(ARADDR_DRAM),
+	.ARLEN_S5(ARLEN_DRAM),
+	.ARSIZE_S5(ARSIZE_DRAM),
+	.ARBURST_S5(ARBURST_DRAM),
+	.ARVALID_S5(ARVALID_DRAM),
+	.ARREADY_S5(ARREADY_DRAM),
+	
+	//READ DATA DRAM
+	.RID_S5(RID_DRAM_replace),
+	.RDATA_S5(RDATA_DRAM),
+	.RRESP_S5(RRESP_DRAM),
+	.RLAST_S5(RLAST_DRAM),
+	.RVALID_S5(RVALID_DRAM),
+	.RREADY_S5(RREADY_DRAM)
+	);
+
+
+endmodule

@@ -1,0 +1,977 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : CHIP
+Version: P-2019.03-SP1-1
+Date   : Tue Dec 24 19:08:01 2024
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: ss0p72vm40c   Library: N16ADFP_StdCellss0p72vm40c
+Wire Load Model Mode: segmented
+
+  Startpoint: u_TOP/axi_wrapper/axi/cs_w_reg
+              (rising edge-triggered flip-flop clocked by axi_clk)
+  Endpoint: u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/mem_reg_13__4_
+            (rising edge-triggered flip-flop clocked by axi_clk)
+  Path Group: axi_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  fifo_mem_DATA_SIZE2_ADDR_SIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE37_ADDR_SIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE37_ADDR_SIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE37_ADDR_SIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE37_ADDR_SIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE37_ADDR_SIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_35
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_33
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_31
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_30
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_28
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_26
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_24
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_22
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_18
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_15
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_14
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_13
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_11
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_10
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_8
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_34
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_32
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_29
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_27
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_25
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_23
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_21
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_20
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_19
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_17
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_16
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_12
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_9
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_11
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_10
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_9
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_8
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_72
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_71
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_68
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_67
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_64
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_63
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_61
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_58
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_57
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_54
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_53
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_50
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_49
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_46
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_45
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_42
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_40
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_38
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_37
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_34
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_32
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_31
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_29
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_27
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_24
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_23
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_21
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_18
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_17
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_15
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_12
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_11
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_9
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_12
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_11
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_10
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_9
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_8
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_5 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_4 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_3 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_2 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_1 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_0 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE2_ADDR_SIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_36
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_13
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_14
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  AXI                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_6 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_7 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  AXI_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CHIP               ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  top                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock axi_clk (rise edge)                               0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  u_TOP/axi_wrapper/axi/cs_w_reg/CP (DFQD2BWP16P90LVT)
+                                                          0.00 #     0.50 r
+  u_TOP/axi_wrapper/axi/cs_w_reg/Q (DFQD2BWP16P90LVT)     0.07       0.57 f
+  u_TOP/axi_wrapper/axi/U121/ZN (CKND1BWP20P90)           0.03       0.60 r
+  u_TOP/axi_wrapper/axi/U1225/ZN (NR2D1BWP16P90LVT)       0.01       0.61 f
+  u_TOP/axi_wrapper/axi/U147/ZN (AOI21D1BWP20P90LVT)      0.18       0.79 r
+  u_TOP/axi_wrapper/axi/U361/ZN (CKND1BWP16P90LVT)        0.18       0.97 f
+  u_TOP/axi_wrapper/axi/U494/ZN (AOI22D1BWP16P90LVT)      0.05       1.01 r
+  u_TOP/axi_wrapper/axi/U327/ZN (ND4D1BWP16P90LVT)        0.02       1.03 f
+  u_TOP/axi_wrapper/axi/U175/ZN (IND4D1BWP16P90LVT)       0.02       1.05 f
+  u_TOP/axi_wrapper/axi/U173/ZN (NR2D1BWP16P90LVT)        0.01       1.07 r
+  u_TOP/axi_wrapper/axi/U161/ZN (CKND1BWP16P90LVT)        0.01       1.07 f
+  u_TOP/axi_wrapper/axi/U1565/ZN (NR2D1BWP16P90LVT)       0.02       1.09 r
+  u_TOP/axi_wrapper/axi/U140/ZN (AOI22D1BWP20P90LVT)      0.13       1.22 f
+  u_TOP/axi_wrapper/axi/U330/ZN (NR2D1BWP16P90LVT)        0.03       1.25 r
+  u_TOP/axi_wrapper/axi/AWVALID_S1 (AXI)                  0.00       1.25 r
+  u_TOP/axi_wrapper/IM_write/AWVALID_M (cdc_write_wrapper_4)
+                                                          0.00       1.25 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/winc (afifo_DSIZE64_ASIZE4_4)
+                                                          0.00       1.25 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/wclk_en (fifo_mem_DATA_SIZE64_ADDR_SIZE4_4)
+                                                          0.00       1.25 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/U2162/ZN (INR2D1BWP16P90LVT)
+                                                          0.02       1.27 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/U524/Z (AN2D1BWP16P90LVT)
+                                                          0.01       1.28 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/U457/Z (AN2D1BWP16P90LVT)
+                                                          0.02       1.30 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/U2055/ZN (ND2D1BWP20P90)
+                                                          0.19       1.49 f
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/U2056/Z (CKBD1BWP20P90)
+                                                          0.15       1.64 f
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/U267/ZN (IOA22D1BWP20P90)
+                                                          0.05       1.69 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/U266/Z (DEL050D1BWP20P90)
+                                                          0.09       1.78 r
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/mem_reg_13__4_/D (DFQD2BWP16P90LVT)
+                                                          0.00       1.78 r
+  data arrival time                                                  1.78
+
+  clock axi_clk (rise edge)                               2.50       2.50
+  clock network delay (ideal)                             0.50       3.00
+  clock uncertainty                                      -0.10       2.90
+  u_TOP/axi_wrapper/IM_write/aw_channel/fifomem/mem_reg_13__4_/CP (DFQD2BWP16P90LVT)
+                                                          0.00       2.90 r
+  library setup time                                      0.00       2.90
+  data required time                                                 2.90
+  --------------------------------------------------------------------------
+  data required time                                                 2.90
+  data arrival time                                                 -1.78
+  --------------------------------------------------------------------------
+  slack (MET)                                                        1.12
+
+
+  Startpoint: u_TOP/cpu/cpu/memwb/memtoreg_reg
+              (rising edge-triggered flip-flop clocked by cpu_clk)
+  Endpoint: u_TOP/axi_wrapper/CPU_im_read/ar_channel/fifomem/mem_reg_11__54_
+            (rising edge-triggered flip-flop clocked by cpu_clk)
+  Path Group: cpu_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  fifo_mem_DATA_SIZE2_ADDR_SIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE2_ADDR_SIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE2_ADDR_SIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE37_ADDR_SIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_34
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_32
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_27
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_25
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_23
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_20
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_19
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_17
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_16
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_12
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_9
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_35
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_33
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_31
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_28
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_26
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_24
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_18
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_15
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_14
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_13
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_11
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_10
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_8
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_13
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_12
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_70
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_69
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_66
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_65
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_62
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_56
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_55
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_52
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_51
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_48
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_47
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_41
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_39
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_36
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_35
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_33
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_30
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_28
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_26
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_25
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_22
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_20
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_19
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_16
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_14
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_13
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_12
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_10
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_9
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_8
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  tag_array_wrapper_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  data_array_wrapper_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_2
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_5 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_3 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_2 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_1 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  SRAM_wrapper_0     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE37_ADDR_SIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_36
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE64_ADDR_SIZE4_14
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_73
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_13
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_14
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  tag_array_wrapper_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  data_array_wrapper_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  forwarding         ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  MEMWB              ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  EXMEM              ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  IDEX               ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  regfile            ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  hazard             ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  IFID               ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CSR                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  pc                 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_6
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_6 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_7 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  synchronizer       ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  L1C_data           ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  L1C_inst           ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CPU                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  SRAM_wrapper_1     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  AXI_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  DMA_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CPU_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CHIP               ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  top                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu_DW01_add_2     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu_DW01_sub_4     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu_DW_cmp_3       ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu_DW_cmp_2       ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CPU_DW01_cmp6_0    ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CPU_DW_cmp_0       ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu_DW01_add_1     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu_DW01_add_3     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  alu_DW01_add_0     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CPU_DW01_add_2     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock cpu_clk (rise edge)                               0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  u_TOP/cpu/cpu/memwb/memtoreg_reg/CP (DFQD2BWP16P90LVT)
+                                                          0.00 #     0.50 r
+  u_TOP/cpu/cpu/memwb/memtoreg_reg/Q (DFQD2BWP16P90LVT)
+                                                          0.06       0.56 f
+  u_TOP/cpu/cpu/memwb/U80/Z (CKBD1BWP16P90LVT)            0.05       0.61 f
+  u_TOP/cpu/cpu/memwb/memtoreg (MEMWB)                    0.00       0.61 f
+  u_TOP/cpu/cpu/U259/ZN (INVD1BWP20P90)                   0.10       0.71 r
+  u_TOP/cpu/cpu/U377/Z (AO22D1BWP16P90LVT)                0.04       0.74 r
+  u_TOP/cpu/cpu/U266/Z (AO22D1BWP16P90LVT)                0.02       0.76 r
+  u_TOP/cpu/cpu/U763/ZN (AOI21D1BWP16P90LVT)              0.01       0.77 f
+  u_TOP/cpu/cpu/U267/ZN (OAI21D1BWP20P90LVT)              0.04       0.81 r
+  u_TOP/cpu/cpu/alu/in2[26] (alu)                         0.00       0.81 r
+  u_TOP/cpu/cpu/alu/U35/ZN (CKND1BWP20P90)                0.03       0.84 f
+  u_TOP/cpu/cpu/alu/U1056/Z (AN2D1BWP16P90)               0.02       0.86 f
+  u_TOP/cpu/cpu/alu/U1058/ZN (OAI32D1BWP16P90)            0.03       0.88 r
+  u_TOP/cpu/cpu/alu/U1061/ZN (OAI21D1BWP16P90)            0.02       0.91 f
+  u_TOP/cpu/cpu/alu/U21/ZN (OAI31D1BWP16P90LVT)           0.16       1.07 r
+  u_TOP/cpu/cpu/alu/U568/ZN (CKND1BWP16P90LVT)            0.15       1.22 f
+  u_TOP/cpu/cpu/alu/U862/ZN (OAI22D1BWP16P90LVT)          0.02       1.24 r
+  u_TOP/cpu/cpu/alu/U41/Z (XOR2D1BWP20P90LVT)             0.18       1.42 f
+  u_TOP/cpu/cpu/alu/U42/ZN (CKND1BWP16P90)                0.14       1.56 r
+  u_TOP/cpu/cpu/alu/U481/ZN (CKND1BWP16P90LVT)            0.10       1.66 f
+  u_TOP/cpu/cpu/alu/U81/Z (AO22D1BWP16P90LVT)             0.03       1.69 f
+  u_TOP/cpu/cpu/alu/U1483/Z (MUX2D1BWP16P90LVT)           0.02       1.71 f
+  u_TOP/cpu/cpu/alu/U1485/Z (MUX2D1BWP16P90LVT)           0.02       1.72 f
+  u_TOP/cpu/cpu/alu/U1489/Z (MUX2D1BWP16P90LVT)           0.02       1.74 f
+  u_TOP/cpu/cpu/alu/U1611/Z (MUX2D1BWP16P90LVT)           0.02       1.76 f
+  u_TOP/cpu/cpu/alu/U1612/Z (MUX3D1BWP16P90LVT)           0.02       1.78 f
+  u_TOP/cpu/cpu/alu/U1613/Z (MUX2D1BWP16P90LVT)           0.02       1.80 f
+  u_TOP/cpu/cpu/alu/add_108/A[24] (alu_DW01_add_1)        0.00       1.80 f
+  u_TOP/cpu/cpu/alu/add_108/U1/Z (AN2D1BWP16P90LVT)       0.01       1.81 f
+  u_TOP/cpu/cpu/alu/add_108/U1_25/CO (FA1D1BWP16P90LVT)
+                                                          0.02       1.83 f
+  u_TOP/cpu/cpu/alu/add_108/U1_26/CO (FA1D1BWP16P90LVT)
+                                                          0.03       1.86 f
+  u_TOP/cpu/cpu/alu/add_108/U1_27/CO (FA1D1BWP16P90LVT)
+                                                          0.03       1.89 f
+  u_TOP/cpu/cpu/alu/add_108/U1_28/CO (FA1D1BWP16P90LVT)
+                                                          0.03       1.91 f
+  u_TOP/cpu/cpu/alu/add_108/U1_29/CO (FA1D1BWP16P90LVT)
+                                                          0.03       1.94 f
+  u_TOP/cpu/cpu/alu/add_108/U1_30/CO (FA1D1BWP16P90LVT)
+                                                          0.03       1.97 f
+  u_TOP/cpu/cpu/alu/add_108/U1_31/CO (FA1D1BWP16P90LVT)
+                                                          0.03       1.99 f
+  u_TOP/cpu/cpu/alu/add_108/U1_32/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.02 f
+  u_TOP/cpu/cpu/alu/add_108/U1_33/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.05 f
+  u_TOP/cpu/cpu/alu/add_108/U1_34/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.07 f
+  u_TOP/cpu/cpu/alu/add_108/U1_35/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.10 f
+  u_TOP/cpu/cpu/alu/add_108/U1_36/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.13 f
+  u_TOP/cpu/cpu/alu/add_108/U1_37/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.15 f
+  u_TOP/cpu/cpu/alu/add_108/U1_38/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.18 f
+  u_TOP/cpu/cpu/alu/add_108/U1_39/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.21 f
+  u_TOP/cpu/cpu/alu/add_108/U1_40/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.23 f
+  u_TOP/cpu/cpu/alu/add_108/U1_41/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.26 f
+  u_TOP/cpu/cpu/alu/add_108/U1_42/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.29 f
+  u_TOP/cpu/cpu/alu/add_108/U1_43/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.31 f
+  u_TOP/cpu/cpu/alu/add_108/U1_44/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.34 f
+  u_TOP/cpu/cpu/alu/add_108/U1_45/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.37 f
+  u_TOP/cpu/cpu/alu/add_108/U1_46/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.39 f
+  u_TOP/cpu/cpu/alu/add_108/U1_47/CO (FA1D1BWP16P90LVT)
+                                                          0.03       2.42 f
+  u_TOP/cpu/cpu/alu/add_108/U1_48/CO (FA1D1BWP16P90LVT)
+                                                          0.02       2.44 f
+  u_TOP/cpu/cpu/alu/add_108/U1_49/Z (XOR3D2BWP16P90LVT)
+                                                          0.06       2.50 r
+  u_TOP/cpu/cpu/alu/add_108/SUM[49] (alu_DW01_add_1)      0.00       2.50 r
+  u_TOP/cpu/cpu/alu/U231/ZN (CKND1BWP16P90LVT)            0.08       2.58 f
+  u_TOP/cpu/cpu/alu/U443/ZN (AOI22D1BWP16P90LVT)          0.05       2.63 r
+  u_TOP/cpu/cpu/alu/U404/ZN (CKND1BWP16P90LVT)            0.03       2.66 f
+  u_TOP/cpu/cpu/alu/U192/ZN (NR4D1BWP16P90LVT)            0.02       2.68 r
+  u_TOP/cpu/cpu/alu/U158/ZN (IND3D1BWP16P90LVT)           0.02       2.70 r
+  u_TOP/cpu/cpu/alu/U107/ZN (CKND1BWP16P90LVT)            0.01       2.71 f
+  u_TOP/cpu/cpu/alu/U413/ZN (AOI222D1BWP16P90LVT)         0.02       2.73 r
+  u_TOP/cpu/cpu/alu/U412/ZN (OAI211D1BWP16P90LVT)         0.01       2.74 f
+  u_TOP/cpu/cpu/alu/U411/ZN (CKND1BWP16P90LVT)            0.01       2.75 r
+  u_TOP/cpu/cpu/alu/U243/ZN (ND4D1BWP16P90LVT)            0.02       2.77 f
+  u_TOP/cpu/cpu/alu/U178/ZN (NR2D1BWP16P90LVT)            0.02       2.80 r
+  u_TOP/cpu/cpu/alu/U165/ZN (ND2D1BWP16P90LVT)            0.04       2.84 f
+  u_TOP/cpu/cpu/alu/U109/ZN (CKND1BWP16P90LVT)            0.02       2.86 r
+  u_TOP/cpu/cpu/alu/U345/ZN (AOI22D1BWP16P90LVT)          0.01       2.87 f
+  u_TOP/cpu/cpu/alu/U344/ZN (OAI22D1BWP16P90LVT)          0.02       2.89 r
+  u_TOP/cpu/cpu/alu/add_149/A[1] (alu_DW01_add_0)         0.00       2.89 r
+  u_TOP/cpu/cpu/alu/add_149/U13/Z (AN2D1BWP16P90LVT)      0.02       2.90 r
+  u_TOP/cpu/cpu/alu/add_149/U14/Z (AN2D1BWP16P90LVT)      0.01       2.91 r
+  u_TOP/cpu/cpu/alu/add_149/U15/Z (AN2D1BWP16P90LVT)      0.01       2.93 r
+  u_TOP/cpu/cpu/alu/add_149/U16/Z (AN2D1BWP16P90LVT)      0.01       2.94 r
+  u_TOP/cpu/cpu/alu/add_149/U6/Z (AN2D1BWP16P90LVT)       0.01       2.95 r
+  u_TOP/cpu/cpu/alu/add_149/U19/Z (AN2D1BWP16P90LVT)      0.01       2.97 r
+  u_TOP/cpu/cpu/alu/add_149/U22/Z (AN2D1BWP16P90LVT)      0.01       2.98 r
+  u_TOP/cpu/cpu/alu/add_149/U20/Z (AN2D1BWP16P90LVT)      0.01       2.99 r
+  u_TOP/cpu/cpu/alu/add_149/U21/Z (AN2D1BWP16P90LVT)      0.01       3.01 r
+  u_TOP/cpu/cpu/alu/add_149/U5/Z (AN2D1BWP16P90LVT)       0.01       3.02 r
+  u_TOP/cpu/cpu/alu/add_149/U1/Z (AN2D1BWP16P90LVT)       0.01       3.03 r
+  u_TOP/cpu/cpu/alu/add_149/U17/Z (AN2D1BWP16P90LVT)      0.01       3.05 r
+  u_TOP/cpu/cpu/alu/add_149/U9/Z (AN2D1BWP16P90LVT)       0.01       3.06 r
+  u_TOP/cpu/cpu/alu/add_149/U8/Z (AN2D1BWP16P90LVT)       0.01       3.07 r
+  u_TOP/cpu/cpu/alu/add_149/U2/Z (AN2D1BWP16P90LVT)       0.01       3.09 r
+  u_TOP/cpu/cpu/alu/add_149/U3/Z (AN2D1BWP16P90LVT)       0.01       3.10 r
+  u_TOP/cpu/cpu/alu/add_149/U10/Z (AN2D1BWP16P90LVT)      0.01       3.11 r
+  u_TOP/cpu/cpu/alu/add_149/U7/Z (AN2D1BWP16P90LVT)       0.01       3.13 r
+  u_TOP/cpu/cpu/alu/add_149/U18/Z (AN2D1BWP16P90LVT)      0.01       3.14 r
+  u_TOP/cpu/cpu/alu/add_149/U12/Z (AN2D1BWP16P90LVT)      0.01       3.15 r
+  u_TOP/cpu/cpu/alu/add_149/U4/ZN (ND2D1BWP16P90LVT)      0.01       3.16 f
+  u_TOP/cpu/cpu/alu/add_149/U46/ZN (CKND1BWP16P90LVT)     0.01       3.16 r
+  u_TOP/cpu/cpu/alu/add_149/U45/Z (XOR2D1BWP16P90LVT)     0.02       3.18 r
+  u_TOP/cpu/cpu/alu/add_149/SUM[22] (alu_DW01_add_0)      0.00       3.18 r
+  u_TOP/cpu/cpu/alu/U724/Z (AO22D1BWP16P90LVT)            0.01       3.19 r
+  u_TOP/cpu/cpu/alu/aluout[22] (alu)                      0.00       3.19 r
+  u_TOP/cpu/cpu/U439/ZN (AOI21D1BWP16P90LVT)              0.01       3.21 f
+  u_TOP/cpu/cpu/U119/ZN (OAI211D2BWP20P90)                0.03       3.23 r
+  u_TOP/cpu/cpu/U118/Z (DEL075D1BWP20P90)                 0.18       3.41 r
+  u_TOP/cpu/cpu/iaddr[22] (CPU)                           0.00       3.41 r
+  u_TOP/cpu/L1C_inst/core_addr_22_ (L1C_inst)             0.00       3.41 r
+  u_TOP/cpu/L1C_inst/U695/Z (BUFFD1BWP16P90LVT)           0.01       3.43 r
+  u_TOP/cpu/L1C_inst/I_addr[22] (L1C_inst)                0.00       3.43 r
+  u_TOP/cpu/U663/ZN (CKND1BWP16P90LVT)                    0.01       3.43 f
+  u_TOP/cpu/U571/ZN (OAI22D1BWP16P90LVT)                  0.01       3.44 r
+  u_TOP/cpu/ARADDR_M0[22] (CPU_wrapper)                   0.00       3.44 r
+  u_TOP/axi_wrapper/ARADDR_M0[22] (AXI_wrapper)           0.00       3.44 r
+  u_TOP/axi_wrapper/CPU_im_read/ARADDR_M[22] (cdc_read_wrapper_7)
+                                                          0.00       3.44 r
+  u_TOP/axi_wrapper/CPU_im_read/ar_channel/wdata[54] (afifo_DSIZE64_ASIZE4_14)
+                                                          0.00       3.44 r
+  u_TOP/axi_wrapper/CPU_im_read/ar_channel/fifomem/wdata[54] (fifo_mem_DATA_SIZE64_ADDR_SIZE4_14)
+                                                          0.00       3.44 r
+  u_TOP/axi_wrapper/CPU_im_read/ar_channel/fifomem/U2109/ZN (CKND1BWP16P90LVT)
+                                                          0.03       3.47 f
+  u_TOP/axi_wrapper/CPU_im_read/ar_channel/fifomem/U626/ZN (IOA22D1BWP20P90)
+                                                          0.02       3.49 r
+  u_TOP/axi_wrapper/CPU_im_read/ar_channel/fifomem/U625/Z (DEL050D1BWP20P90)
+                                                          0.10       3.59 r
+  u_TOP/axi_wrapper/CPU_im_read/ar_channel/fifomem/mem_reg_11__54_/D (DFQD2BWP16P90LVT)
+                                                          0.00       3.59 r
+  data arrival time                                                  3.59
+
+  clock cpu_clk (rise edge)                               4.00       4.00
+  clock network delay (ideal)                             0.50       4.50
+  clock uncertainty                                      -0.10       4.40
+  u_TOP/axi_wrapper/CPU_im_read/ar_channel/fifomem/mem_reg_11__54_/CP (DFQD2BWP16P90LVT)
+                                                          0.00       4.40 r
+  library setup time                                      0.00       4.40
+  data required time                                                 4.40
+  --------------------------------------------------------------------------
+  data required time                                                 4.40
+  data arrival time                                                 -3.59
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.80
+
+
+  Startpoint: DRAM_valid (input port clocked by dram_clk)
+  Endpoint: u_TOP/axi_wrapper/dram_read/r_channel/fifomem/mem_reg_11__1_
+            (rising edge-triggered flip-flop clocked by dram_clk)
+  Path Group: dram_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  DRAM_wrapper       ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  top                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_21
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_0 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  AXI_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dram_clk (rise edge)                              0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  input external delay                                    3.00       3.50 r
+  DRAM_valid (in)                                         0.00       3.50 r
+  ipad_DRAM_valid/PAD (PDCDG_H)                           0.00       3.50 r
+  ipad_DRAM_valid/C (PDCDG_H)                             0.17       3.67 r
+  u_TOP/DRAM_valid (top)                                  0.00       3.67 r
+  u_TOP/DRAM/valid (DRAM_wrapper)                         0.00       3.67 r
+  u_TOP/DRAM/U751/ZN (ND2D1BWP16P90)                      0.09       3.76 f
+  u_TOP/DRAM/U750/ZN (ND2D1BWP16P90)                      0.05       3.81 r
+  u_TOP/DRAM/RVALID_S (DRAM_wrapper)                      0.00       3.81 r
+  u_TOP/axi_wrapper/RVALID_S5 (AXI_wrapper)               0.00       3.81 r
+  u_TOP/axi_wrapper/dram_read/RVALID_S (cdc_read_wrapper_0)
+                                                          0.00       3.81 r
+  u_TOP/axi_wrapper/dram_read/r_channel/winc (afifo_DSIZE33_ASIZE4_0)
+                                                          0.00       3.81 r
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/wclk_en (fifo_mem_DATA_SIZE33_ADDR_SIZE4_0)
+                                                          0.00       3.81 r
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/U1119/ZN (INR2D1BWP16P90LVT)
+                                                          0.02       3.83 r
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/U276/Z (AN2D1BWP16P90LVT)
+                                                          0.01       3.85 r
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/U240/Z (AN2D1BWP16P90LVT)
+                                                          0.02       3.86 r
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/U1048/ZN (ND2D1BWP20P90)
+                                                          0.18       4.04 f
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/U266/ZN (IOA22D1BWP20P90)
+                                                          0.06       4.10 r
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/U265/Z (DEL050D1BWP20P90)
+                                                          0.10       4.20 r
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/mem_reg_11__1_/D (DFQD2BWP16P90LVT)
+                                                          0.00       4.20 r
+  data arrival time                                                  4.20
+
+  clock dram_clk (rise edge)                              5.00       5.00
+  clock network delay (ideal)                             0.50       5.50
+  clock uncertainty                                      -0.10       5.40
+  u_TOP/axi_wrapper/dram_read/r_channel/fifomem/mem_reg_11__1_/CP (DFQD2BWP16P90LVT)
+                                                          0.00       5.40 r
+  library setup time                                      0.00       5.40
+  data required time                                                 5.40
+  --------------------------------------------------------------------------
+  data required time                                                 5.40
+  data arrival time                                                 -4.20
+  --------------------------------------------------------------------------
+  slack (MET)                                                        1.19
+
+
+  Startpoint: u_TOP/ROM/ARLEN_INCR_reg_0_
+              (rising edge-triggered flip-flop clocked by rom_clk)
+  Endpoint: u_TOP/ROM/ARLEN_INCR_reg_31_
+            (rising edge-triggered flip-flop clocked by rom_clk)
+  Path Group: rom_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  fifo_mem_DATA_SIZE2_ADDR_SIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  fifo_mem_DATA_SIZE33_ADDR_SIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_29
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  wptr_full_ADDR_SIZE4_3
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_30
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_5
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  rptr_empty_ADDR_SIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_60
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_59
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_10
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_8
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  two_ff_sync_SIZE5_7
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE2_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE37_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE33_ASIZE4_4
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_11
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  afifo_DSIZE64_ASIZE4_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_write_wrapper_1
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  cdc_read_wrapper_4 ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  WDT_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  ROM_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  AXI_wrapper        ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  CHIP               ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  top                ZeroWireload          N16ADFP_StdCellss0p72vm40c
+  ROM_wrapper_DW01_dec_0
+                     ZeroWireload          N16ADFP_StdCellss0p72vm40c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock rom_clk (rise edge)                               0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  u_TOP/ROM/ARLEN_INCR_reg_0_/CP (DFQD2BWP16P90LVT)       0.00       0.50 r
+  u_TOP/ROM/ARLEN_INCR_reg_0_/Q (DFQD2BWP16P90LVT)        0.06       0.56 f
+  u_TOP/ROM/U79/Z (DEL050D1BWP20P90)                      0.09       0.65 f
+  u_TOP/ROM/sub_115/A[0] (ROM_wrapper_DW01_dec_0)         0.00       0.65 f
+  u_TOP/ROM/sub_115/U1/Z (OR2D1BWP16P90LVT)               0.02       0.66 f
+  u_TOP/ROM/sub_115/U62/Z (OR2D1BWP16P90)                 0.02       0.69 f
+  u_TOP/ROM/sub_115/U61/Z (OR2D1BWP16P90)                 0.02       0.71 f
+  u_TOP/ROM/sub_115/U60/Z (OR2D1BWP16P90)                 0.02       0.73 f
+  u_TOP/ROM/sub_115/U59/Z (OR2D1BWP16P90)                 0.02       0.75 f
+  u_TOP/ROM/sub_115/U58/Z (OR2D1BWP16P90)                 0.02       0.77 f
+  u_TOP/ROM/sub_115/U57/Z (OR2D1BWP16P90)                 0.02       0.80 f
+  u_TOP/ROM/sub_115/U56/Z (OR2D1BWP16P90)                 0.02       0.82 f
+  u_TOP/ROM/sub_115/U55/ZN (NR2D1BWP16P90)                0.02       0.84 r
+  u_TOP/ROM/sub_115/U54/ZN (ND2D1BWP16P90)                0.02       0.86 f
+  u_TOP/ROM/sub_115/U52/Z (OR2D1BWP16P90)                 0.02       0.88 f
+  u_TOP/ROM/sub_115/U50/Z (OR2D1BWP16P90)                 0.02       0.90 f
+  u_TOP/ROM/sub_115/U48/Z (OR2D1BWP16P90)                 0.02       0.92 f
+  u_TOP/ROM/sub_115/U46/Z (OR2D1BWP16P90)                 0.02       0.95 f
+  u_TOP/ROM/sub_115/U44/Z (OR2D1BWP16P90)                 0.02       0.97 f
+  u_TOP/ROM/sub_115/U42/Z (OR2D1BWP16P90)                 0.02       0.99 f
+  u_TOP/ROM/sub_115/U40/Z (OR2D1BWP16P90)                 0.02       1.01 f
+  u_TOP/ROM/sub_115/U38/Z (OR2D1BWP16P90)                 0.02       1.04 f
+  u_TOP/ROM/sub_115/U36/Z (OR2D1BWP16P90)                 0.02       1.06 f
+  u_TOP/ROM/sub_115/U33/Z (OR2D1BWP16P90)                 0.02       1.08 f
+  u_TOP/ROM/sub_115/U31/Z (OR2D1BWP16P90)                 0.02       1.10 f
+  u_TOP/ROM/sub_115/U29/Z (OR2D1BWP16P90)                 0.02       1.13 f
+  u_TOP/ROM/sub_115/U27/Z (OR2D1BWP16P90)                 0.02       1.15 f
+  u_TOP/ROM/sub_115/U25/Z (OR2D1BWP16P90)                 0.02       1.17 f
+  u_TOP/ROM/sub_115/U23/Z (OR2D1BWP16P90)                 0.02       1.19 f
+  u_TOP/ROM/sub_115/U21/Z (OR2D1BWP16P90)                 0.02       1.22 f
+  u_TOP/ROM/sub_115/U19/Z (OR2D1BWP16P90)                 0.02       1.24 f
+  u_TOP/ROM/sub_115/U17/Z (OR2D1BWP16P90)                 0.02       1.26 f
+  u_TOP/ROM/sub_115/U15/Z (OR2D1BWP16P90)                 0.02       1.28 f
+  u_TOP/ROM/sub_115/U11/ZN (NR2D1BWP16P90)                0.01       1.29 r
+  u_TOP/ROM/sub_115/U10/Z (XOR2D1BWP16P90)                0.03       1.32 r
+  u_TOP/ROM/sub_115/SUM[31] (ROM_wrapper_DW01_dec_0)      0.00       1.32 r
+  u_TOP/ROM/U162/ZN (AOI22D1BWP16P90LVT)                  0.01       1.33 f
+  u_TOP/ROM/U161/ZN (IOAI21D1BWP16P90LVT)                 0.01       1.34 r
+  u_TOP/ROM/ARLEN_INCR_reg_31_/D (DFQD2BWP16P90LVT)       0.00       1.34 r
+  data arrival time                                                  1.34
+
+  clock rom_clk (rise edge)                              50.10      50.10
+  clock network delay (ideal)                             0.50      50.60
+  clock uncertainty                                      -0.10      50.50
+  u_TOP/ROM/ARLEN_INCR_reg_31_/CP (DFQD2BWP16P90LVT)      0.00      50.50 r
+  library setup time                                     -0.01      50.49
+  data required time                                                50.49
+  --------------------------------------------------------------------------
+  data required time                                                50.49
+  data arrival time                                                 -1.34
+  --------------------------------------------------------------------------
+  slack (MET)                                                       49.16
+
+
+1

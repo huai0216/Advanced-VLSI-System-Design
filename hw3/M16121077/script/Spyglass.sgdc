@@ -1,0 +1,49 @@
+#modify clk period & edge{0 half clk period}, do not modify clk2
+current_design "top"
+clock -name "top.clk" -domain clk -tag clk -period 1 -edge {0 0.5}
+clock -name "top.clk2" -domain clk2 -tag clk2 -period 50 -edge {0 25}
+reset -name "top.rst" -value 1 -sync
+reset -name "top.rst2" -value 1 -sync
+
+abstract_port -module TS1N16ADFPCLLLVTA512X45M4SWSHOD -ports SLP DSLP SD PUDELAY CEB WEB A D BWEB RTSEL WTSEL Q  -clock clk
+
+#reset CDC flip flops with initial value 0
+
+cdc_filter_coherency -unrelated top.WDT.WDEN_out top.WDT.WDLIVE_out top.WDT.WTOCNT_out top.WDT.WTO
+#top.WDT.WDT.WDLIVE_reg
+
+#s1
+define_tag -tag initState -name top.WDT.WDEN_out -value 0
+define_tag -tag initState -name top.WDT.sync_en.A1 -value 0
+define_tag -tag initState -name top.WDT.sync_en.A2 -value 0
+define_tag -tag initState -name top.WDT.sync_live.A1 -value 0
+define_tag -tag initState -name top.WDT.sync_live.A2 -value 0
+define_tag -tag initState -name top.WDT.sync_cnt.A1 -value 0
+define_tag -tag initState -name top.WDT.sync_cnt.A2 -value 0
+#define_tag -tag initState -name top.WDT.WDEN_syn1 -value 0
+
+#s2
+define_tag -tag initState -name top.WDT.WDLIVE_out -value 0
+#define_tag -tag initState -name top.WDT.WDT.WDLIVE_syn1 -value 0
+
+#s3
+define_tag -tag initState -name top.WDT.WTOCNT_out -value 0
+#define_tag -tag initState -name top.WDT.WDT.WTO_syn1 -value 0
+
+define_tag -tag initState -name top.WDT.WTO -value 0
+
+#if there are any fifos, set fifo memory
+#WDEN
+#fifo -memory "top.WDT_wrapper.w1.s1.d_out"
+#
+##WDLIVE
+#fifo -memory "top.WDT_wrapper.w1.s2.d_out"
+#
+##WTOCNT
+#fifo -memory "top.WDT_wrapper.w1.s3.d_out"
+#
+##WTO
+#fifo -memory "top.WDT_wrapper.w1.s4.d_out"
+
+
+waive -rule Ar_syncrst_setupcheck01

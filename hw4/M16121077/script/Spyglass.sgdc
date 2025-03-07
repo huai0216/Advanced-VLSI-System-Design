@@ -1,0 +1,421 @@
+current_design "top"
+
+# define your clock
+clock -name "top.cpu_clk"     -domain cpu_clk     -tag cpu_clk    -period 5.0  -edge {0 2.5}
+clock -name "top.axi_clk"     -domain axi_clk     -tag axi_clk    -period 2.5  -edge {0 1.25}
+clock -name "top.dram_clk"    -domain dram_clk    -tag dram_clk   -period 5.0  -edge {0 2.5}
+clock -name "top.rom_clk"     -domain rom_clk     -tag rom_clk    -period 50  -edge {0 25}
+
+reset -name "cpu_rst"  -value 1 -sync
+reset -name "axi_rst"  -value 1 -sync
+reset -name "rom_rst"  -value 1 -sync
+reset -name "dram_rst"  -value 1 -sync
+
+abstract_port -module TS1N16ADFPCLLLVTA128X64M4SWSHOD_data_array -ports  SLP DSLP SD PUDELAY CEB WEB A D BWEB RTSEL WTSEL Q -clock cpu_clk
+abstract_port -module TS1N16ADFPCLLLVTA128X64M4SWSHOD_tag_array -ports  SLP DSLP SD PUDELAY CEB WEB A D BWEB RTSEL WTSEL Q -clock cpu_clk
+abstract_port -module TS1N16ADFPCLLLVTA512X45M4SWSHOD -ports  SLP DSLP SD PUDELAY CEB WEB A D BWEB RTSEL WTSEL Q  -clock cpu_clk
+
+
+
+
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.w_channel.wptr_full.wgray_next top.axi_wrapper.WDT_write.w_channel.wptr_full.wq2_rptr
+cdc_filter_coherency -unrelated top.axi_wrapper.CPU_dm_read.r_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.cpu_im_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.cpu_im_write.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.CPU_im_read.ar_channel.sync_r2w.q1[2:0] top.axi_wrapper.CPU_im_read.r_channel.sync_w2r.q1[2:0] top.axi_wrapper.CPU_dm_read.r_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.CPU_dm_read.ar_channel.sync_r2w.q1[2:0] top.axi_wrapper.CPU_dm_read.r_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DMA_read.ar_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_read.r_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.im_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.im_read.r_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.dm_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.dm_read.r_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.sdma_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.sdma_read.r_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DMA_read.r_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.dma_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.dma_write.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.dma_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.dma_write.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.IM_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.im_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.IM_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.IM_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DM_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.DM_write.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.dm_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.DM_write.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DM_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.DM_write.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DM_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.DM_write.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DMA_write_slave.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.DMA_write_slave.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DMA_write_slave.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.DMA_write_slave.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DMA_write_slave.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.DMA_write_slave.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.b_channel.sync_r2w.q1[2:0] top.axi_wrapper.dma_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.b_channel.sync_r2w.q1[2:0] top.axi_wrapper.IM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.IM_write.b_channel.sync_w2r.q1[2:0]  top.axi_wrapper.DM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.b_channel.sync_w2r.q1[2:0] top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.CPU_im_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.CPU_im_read.r_channel.sync_r2w.q1[2:0] top.axi_wrapper.CPU_dm_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.CPU_dm_read.r_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.DMA_read.r_channel.sync_r2w.q1[2:0] top.axi_wrapper.im_read.r_channel.sync_w2r.q1[2:0] top.axi_wrapper.dm_read.r_channel.sync_w2r.q1[2:0] top.axi_wrapper.sdma_read.r_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.IM_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.IM_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.cpu_im_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.dma_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.IM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.IM_write.w_channel.sync_r2w.q1[2:0] top.axi_wrapper.DM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.CPU_im_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.CPU_dm_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.DMA_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.im_read.ar_channel.sync_r2w.q1[2:0] top.axi_wrapper.dm_read.ar_channel.sync_r2w.q1[2:0] top.axi_wrapper.sdma_read.ar_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DRAM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DRAM_write.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DRAM_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.DRAM_write.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.WDT_write.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.aw_channel.sync_r2w.q1[2:0] top.axi_wrapper.WDT_write.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.dram_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.dram_read.r_channel.sync_r2w.q1[2:0] top.axi_wrapper.DRAM_write.aw_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DRAM_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.dram_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.dram_read.r_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.dram_read.r_channel.sync_r2w.q1[2:0] top.axi_wrapper.DRAM_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.DRAM_write.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.dram_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.DRAM_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.DRAM_write.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DRAM_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.DRAM_write.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.DRAM_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.DRAM_write.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.rom_read.ar_channel.sync_w2r.q1[2:0] top.axi_wrapper.rom_read.r_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.WDT_write.w_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.w_channel.sync_w2r.q1[2:0] top.axi_wrapper.WDT_write.b_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.aw_channel.sync_w2r.q1[2:0] top.axi_wrapper.WDT_write.b_channel.sync_r2w.q1[2:0]
+
+
+
+# ---------------- reset register to 0 ---------------- # 
+# ---------------- axi_m0_cdc ---------------- #
+
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.ar_channel.sync_w2r.q2 	        -value 0
+
+# R
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.r_channel.sync_r2w.q1 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.r_channel.sync_r2w.q1 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.r_channel.sync_w2r.q1 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_im_read.r_channel.sync_w2r.q1 	        -value 0
+
+
+
+
+
+# ---------------- axi_m1_cdc ---------------- #
+# AW
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.aw_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.aw_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.aw_channel.sync_w2r.q2 	        -value 0
+
+
+# W
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.w_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.w_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.w_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.w_channel.sync_w2r.q2 	        -value 0
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.ar_channel.sync_w2r.q2 	        -value 0
+											 
+# R
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.r_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.r_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.r_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.CPU_dm_read.r_channel.sync_w2r.q2 	        -value 0
+
+# B
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.b_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.b_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.b_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.cpu_im_write.b_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+# ---------------- axi_dma_cdc ---------------- #
+# AW
+define_tag -tag initState -name top.axi_wrapper.dma_write.aw_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.aw_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.aw_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.aw_channel.sync_w2r.q2 	        -value 0
+
+
+# W
+define_tag -tag initState -name top.axi_wrapper.dma_write.w_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.w_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.w_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.w_channel.sync_w2r.q2 	        -value 0
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.DMA_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_read.ar_channel.sync_w2r.q2 	        -value 0
+											 
+# R
+define_tag -tag initState -name top.axi_wrapper.DMA_read.r_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_read.r_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_read.r_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_read.r_channel.sync_w2r.q2 	        -value 0
+
+# B
+define_tag -tag initState -name top.axi_wrapper.dma_write.b_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.b_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.b_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dma_write.b_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+
+# ---------------- axi_s0_cdc ---------------- #
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.rom_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.rom_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.rom_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.rom_read.ar_channel.sync_w2r.q2 	        -value 0
+
+# R
+define_tag -tag initState -name top.axi_wrapper.rom_read.r_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.rom_read.r_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.rom_read.r_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.rom_read.r_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+
+
+
+# ---------------- axi_s1_cdc ---------------- #
+# AW
+define_tag -tag initState -name top.axi_wrapper.IM_write.aw_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.aw_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.aw_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.aw_channel.sync_w2r.q2 	        -value 0
+
+
+# W
+define_tag -tag initState -name top.axi_wrapper.IM_write.w_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.w_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.w_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.w_channel.sync_w2r.q2 	        -value 0
+
+# B
+define_tag -tag initState -name top.axi_wrapper.IM_write.b_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.b_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.b_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.IM_write.b_channel.sync_w2r.q2 	        -value 0
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.im_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.im_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.im_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.im_read.ar_channel.sync_w2r.q2 	        -value 0
+
+# R
+define_tag -tag initState -name top.axi_wrapper.im_read.r_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.im_read.r_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.im_read.r_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.im_read.r_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+
+# ---------------- axi_s2_cdc ---------------- #
+# AW
+define_tag -tag initState -name top.axi_wrapper.DM_write.aw_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.aw_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.aw_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.aw_channel.sync_w2r.q2 	        -value 0
+
+
+# W
+define_tag -tag initState -name top.axi_wrapper.DM_write.w_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.w_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.w_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.w_channel.sync_w2r.q2 	        -value 0
+
+# B
+define_tag -tag initState -name top.axi_wrapper.DM_write.b_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.b_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.b_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DM_write.b_channel.sync_w2r.q2 	        -value 0
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.dm_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dm_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.dm_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dm_read.ar_channel.sync_w2r.q2 	        -value 0
+
+# R
+define_tag -tag initState -name top.axi_wrapper.dm_read.r_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dm_read.r_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.dm_read.r_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dm_read.r_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+
+# ---------------- axi_s3_cdc ---------------- #
+# AW
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.aw_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.aw_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.aw_channel.sync_w2r.q2 	        -value 0
+
+
+# W
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.w_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.w_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.w_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.w_channel.sync_w2r.q2 	        -value 0
+
+# B
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.b_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.b_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.b_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DMA_write_slave.b_channel.sync_w2r.q2 	        -value 0
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.sdma_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.sdma_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.sdma_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.sdma_read.ar_channel.sync_w2r.q2 	        -value 0
+
+# R
+define_tag -tag initState -name top.axi_wrapper.sdma_read.r_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.sdma_read.r_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.sdma_read.r_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.sdma_read.r_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+
+
+# ---------------- axi_s4_cdc ---------------- #
+# AW
+define_tag -tag initState -name top.axi_wrapper.WDT_write.aw_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.aw_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.aw_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.aw_channel.sync_w2r.q2 	        -value 0
+
+
+# W
+define_tag -tag initState -name top.axi_wrapper.WDT_write.w_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.w_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.w_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.w_channel.sync_w2r.q2 	        -value 0
+
+# B
+define_tag -tag initState -name top.axi_wrapper.WDT_write.b_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.b_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.b_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.WDT_write.b_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+
+
+# ---------------- axi_s5_cdc ---------------- #
+# AW
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.aw_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.aw_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.aw_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.aw_channel.sync_w2r.q2 	        -value 0
+
+
+# W
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.w_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.w_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.w_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.w_channel.sync_w2r.q2 	        -value 0
+
+# B
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.b_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.b_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.b_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.DRAM_write.b_channel.sync_w2r.q2 	        -value 0
+
+# AR 
+define_tag -tag initState -name top.axi_wrapper.dram_read.ar_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dram_read.ar_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.dram_read.ar_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dram_read.ar_channel.sync_w2r.q2 	        -value 0
+
+# R
+define_tag -tag initState -name top.axi_wrapper.dram_read.r_channel.sync_r2w.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dram_read.r_channel.sync_r2w.q2 	        -value 0
+define_tag -tag initState -name top.axi_wrapper.dram_read.r_channel.sync_w2r.q1 	    -value 0
+define_tag -tag initState -name top.axi_wrapper.dram_read.r_channel.sync_w2r.q2 	        -value 0
+
+
+
+
+
+waive -rule Ar_syncrst_setupcheck01
+
+#  async fifo source flip-flop is a static signal, no synchronization may be required
+# m0
+quasi_static -name top.axi_wrapper.CPU_im_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.CPU_im_read.r_channel.fifomem.mem
+
+
+
+# m1
+quasi_static -name top.axi_wrapper.cpu_im_write.aw_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.cpu_im_write.w_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.CPU_dm_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.CPU_dm_read.r_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.cpu_im_write.b_channel.fifomem.mem
+
+
+#dma
+quasi_static -name top.axi_wrapper.dma_write.aw_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.dma_write.w_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DMA_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DMA_read.r_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.dma_write.b_channel.fifomem.mem
+
+
+# s0
+quasi_static -name top.axi_wrapper.rom_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.rom_read.r_channel.fifomem.mem
+
+
+cdc_filter_coherency -unrelated top.axi_wrapper.rom_read.ar_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.rom_read.r_channel.sync_w2r.q1[2:0]
+
+# s1
+quasi_static -name top.axi_wrapper.IM_write.aw_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.IM_write.w_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.im_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.im_read.r_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.IM_write.b_channel.fifomem.mem
+
+
+# s2
+quasi_static -name top.axi_wrapper.DM_write.aw_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DM_write.w_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.dm_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.dm_read.r_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DM_write.b_channel.fifomem.mem
+
+
+# s3
+quasi_static -name top.axi_wrapper.DMA_write_slave.aw_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DMA_write_slave.w_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.sdma_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.sdma_read.r_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DMA_write_slave.b_channel.fifomem.mem
+
+
+# s4
+quasi_static -name top.axi_wrapper.WDT_write.aw_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.WDT_write.w_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.WDT_write.b_channel.fifomem.mem
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.b_channel.sync_w2r.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.w_channel.sync_r2w.q1[2:0]
+cdc_filter_coherency -unrelated top.axi_wrapper.WDT_write.aw_channel.sync_r2w.q1[2:0]
+
+
+# s5
+quasi_static -name top.axi_wrapper.DRAM_write.aw_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DRAM_write.w_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.dram_read.ar_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.dram_read.r_channel.fifomem.mem
+quasi_static -name top.axi_wrapper.DRAM_write.b_channel.fifomem.mem
+
