@@ -1,5 +1,5 @@
 # Advanced VLSI System Design
-Course VLSI in NCKU
+Course AVSD in NCKU 2024
 
 ## HW1 
 ### 5 stage pipelined RISC-V CPU
